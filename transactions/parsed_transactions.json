@@ -1,7 +1,8 @@
 [
   {
     "id": "2586299c-0c2b-4db5-b59c-cd2f6d865b81",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-01-06",
     "quantity": 0.325796,
@@ -10,7 +11,8 @@
   },
   {
     "id": "41e01824-2df3-495a-a99b-ef3a0d0442ab",
-    "ticker": "IE00B4L5Y983",
+    "isin": "IE00B4L5Y983",
+    "ticker": "EUNL.DE",
     "name": "Core MSCI World USD (Acc)",
     "date": "2025-01-06",
     "quantity": 1.889287,
@@ -19,7 +21,8 @@
   },
   {
     "id": "cecfe6f2-8601-4695-8aa5-a102cb0c85ee",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-01-06",
     "quantity": 0.844772,
@@ -28,7 +31,8 @@
   },
   {
     "id": "cb47a152-f54e-461d-b227-e3fb30006e3c",
-    "ticker": "US88160R1014",
+    "isin": "US88160R1014",
+    "ticker": "TL0.DE",
     "name": "Tesla",
     "date": "2025-01-07",
     "quantity": 0.0247,
@@ -37,7 +41,8 @@
   },
   {
     "id": "12fcf7a3-7e16-4206-90a1-db2c9dbf8a60",
-    "ticker": "LU0335044896",
+    "isin": "LU0335044896",
+    "ticker": "XEOD.DE",
     "name": "Euro Overnight Rate Swap EUR (Dist)",
     "date": "2025-01-29",
     "quantity": 0.927853,
@@ -46,7 +51,8 @@
   },
   {
     "id": "44f9df9e-3c5e-4d8d-9942-34d2422ea6be",
-    "ticker": "LU0335044896",
+    "isin": "LU0335044896",
+    "ticker": "XEOD.DE",
     "name": "Euro Overnight Rate Swap EUR (Dist)",
     "date": "2025-01-29",
     "quantity": 3.0,
@@ -55,7 +61,8 @@
   },
   {
     "id": "73ca803a-945f-4b71-be6e-d5798f29cac6",
-    "ticker": "LU0335044896",
+    "isin": "LU0335044896",
+    "ticker": "XEOD.DE",
     "name": "Euro Overnight Rate Swap EUR (Dist)",
     "date": "2025-01-29",
     "quantity": 3.0,
@@ -64,7 +71,8 @@
   },
   {
     "id": "8d24bdbc-ad41-4e66-b487-8461a55fdbca",
-    "ticker": "LU0335044896",
+    "isin": "LU0335044896",
+    "ticker": "XEOD.DE",
     "name": "Euro Overnight Rate Swap EUR (Dist)",
     "date": "2025-01-29",
     "quantity": 0.927853,
@@ -73,7 +81,8 @@
   },
   {
     "id": "d327e781-efc7-43a5-a19d-b31dffe0a10a",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-02-03",
     "quantity": 0.811661,
@@ -82,7 +91,8 @@
   },
   {
     "id": "81d49940-d23e-4c45-9b11-46e0a2b2a52b",
-    "ticker": "IE00BK5BQT80",
+    "isin": "IE00BK5BQT80",
+    "ticker": "VWCE.DE",
     "name": "FTSE All-World USD (Acc)",
     "date": "2025-02-03",
     "quantity": 3.631873,
@@ -91,7 +101,8 @@
   },
   {
     "id": "c966e299-ca6e-443e-990d-c9252a2d0bd1",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-02-17",
     "quantity": 1.576789,
@@ -100,7 +111,8 @@
   },
   {
     "id": "967fea0f-f0c0-475b-bcb4-e3516c38684c",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-03-03",
     "quantity": 0.82949,
@@ -109,7 +121,8 @@
   },
   {
     "id": "35c8fb33-006b-4a24-a8ef-9783e36f7717",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-03-17",
     "quantity": 1.620745,
@@ -118,7 +131,8 @@
   },
   {
     "id": "9de78db4-552e-4bf3-a4dd-51bd9d036769",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-04-02",
     "quantity": 0.907803,
@@ -127,7 +141,8 @@
   },
   {
     "id": "98be2071-46ba-462a-8792-0e2a96e43f7a",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-04-04",
     "quantity": 15.243902,
@@ -136,7 +151,8 @@
   },
   {
     "id": "7b3cfe38-90a0-48f8-8c48-8e178d59bef5",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-04-16",
     "quantity": 1.717327,
@@ -145,7 +161,8 @@
   },
   {
     "id": "bd542ddb-2362-48e1-9a20-254b67131e6a",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-05-02",
     "quantity": 0.272538,
@@ -154,7 +171,8 @@
   },
   {
     "id": "d439f339-4d2b-4ac1-bb82-779a0e93bf45",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-05-02",
     "quantity": 0.346308,
@@ -163,7 +181,8 @@
   },
   {
     "id": "fed19315-6901-4104-b47e-51fa75488030",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-05-02",
     "quantity": 0.94568,
@@ -172,7 +191,8 @@
   },
   {
     "id": "849980c1-17c4-4091-b5ed-1d2b460eeacc",
-    "ticker": "IE00BK5BQT80",
+    "isin": "IE00BK5BQT80",
+    "ticker": "VWCE.DE",
     "name": "FTSE All-World USD (Acc)",
     "date": "2025-05-02",
     "quantity": 4.032908,
@@ -181,7 +201,8 @@
   },
   {
     "id": "c38ba252-c2be-486d-82e7-01921c5565c0",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-05-02",
     "quantity": 0.73303,
@@ -190,7 +211,8 @@
   },
   {
     "id": "cddda853-7dec-4269-9c42-b85a02ca1905",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-05-09",
     "quantity": 0.713165,
@@ -199,7 +221,8 @@
   },
   {
     "id": "826b2991-2809-4dbf-b4ba-f40c290dd614",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-05-16",
     "quantity": 0.264998,
@@ -208,7 +231,8 @@
   },
   {
     "id": "65201272-a45e-4d88-97c3-cd116bc97835",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-05-16",
     "quantity": 0.6854,
@@ -217,7 +241,8 @@
   },
   {
     "id": "66b8a114-797f-4433-acc5-c72fa10fc4c2",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-05-16",
     "quantity": 1.576292,
@@ -226,7 +251,8 @@
   },
   {
     "id": "f80bdf80-1d9f-4635-8995-51ad93ed190b",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-05-23",
     "quantity": 0.696669,
@@ -235,7 +261,8 @@
   },
   {
     "id": "d6bb70d9-96be-4919-ab79-ef098a3a7d01",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-06-02",
     "quantity": 0.286237,
@@ -244,7 +271,8 @@
   },
   {
     "id": "7a7d8f60-cc6d-4b6f-8482-c25b8164ba81",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-06-02",
     "quantity": 0.335435,
@@ -253,7 +281,8 @@
   },
   {
     "id": "d01dbb28-cacb-4f06-97ce-74b7db7b656d",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-06-02",
     "quantity": 0.911311,
@@ -262,7 +291,8 @@
   },
   {
     "id": "380b3b93-fe68-4fc2-8b5a-ac7cb1044a27",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-06-02",
     "quantity": 0.686907,
@@ -271,7 +301,8 @@
   },
   {
     "id": "47d3d4a7-e5c7-4061-a363-92c4a9f8abdc",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-06-09",
     "quantity": 0.669254,
@@ -280,7 +311,8 @@
   },
   {
     "id": "f0b3d31b-ffea-4e6e-ae82-82d38f3ea1da",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-06-16",
     "quantity": 0.292842,
@@ -289,7 +321,8 @@
   },
   {
     "id": "17157529-39fb-4685-a0aa-6410b21be2d2",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-06-16",
     "quantity": 0.67078,
@@ -298,7 +331,8 @@
   },
   {
     "id": "e5b2f56c-1b99-4c78-b31f-aba92efff1fa",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-06-16",
     "quantity": 1.595405,
@@ -307,7 +341,8 @@
   },
   {
     "id": "3c3641f0-82d5-423b-b4e2-5ea3a5429bb0",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-06-23",
     "quantity": 0.662076,
@@ -316,7 +351,8 @@
   },
   {
     "id": "281c82c7-1bee-4aed-846d-469b6cfaeeb6",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-07-02",
     "quantity": 0.280898,
@@ -325,7 +361,8 @@
   },
   {
     "id": "f079f697-0b4c-48e2-aa45-91e86010d4cc",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-07-02",
     "quantity": 0.332093,
@@ -334,7 +371,8 @@
   },
   {
     "id": "066a086d-242c-41eb-9788-de73cd6aeb91",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-07-02",
     "quantity": 0.889838,
@@ -343,7 +381,8 @@
   },
   {
     "id": "62dac1be-d965-4bb6-9ddb-08c07f1f8e35",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-07-02",
     "quantity": 0.657635,
@@ -352,7 +391,8 @@
   },
   {
     "id": "1e4c4c1b-6070-4302-8690-e2feea3bc694",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-07-09",
     "quantity": 0.654793,
@@ -361,7 +401,8 @@
   },
   {
     "id": "10f4f808-179a-4cff-b093-9cbdf116c0e8",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-07-16",
     "quantity": 0.277438,
@@ -370,7 +411,8 @@
   },
   {
     "id": "ebe86b0b-3200-4256-a147-3dc178e1c719",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-07-16",
     "quantity": 0.652145,
@@ -379,7 +421,8 @@
   },
   {
     "id": "f67bb210-53d4-49a9-b0b6-99d533a5c19e",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-07-16",
     "quantity": 3.192848,
@@ -388,7 +431,8 @@
   },
   {
     "id": "8674ab8e-e0f2-44ac-a826-c78f27af7a65",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-07-23",
     "quantity": 0.657981,
@@ -397,7 +441,8 @@
   },
   {
     "id": "75315ffc-fa91-4ba0-94eb-c340f80785d7",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-08-04",
     "quantity": 0.283607,
@@ -406,7 +451,8 @@
   },
   {
     "id": "1d2da990-3923-4400-aa2f-58e46e199975",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-08-04",
     "quantity": 0.297831,
@@ -415,7 +461,8 @@
   },
   {
     "id": "24d3947e-e923-4997-9696-44af3d15ab02",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-08-04",
     "quantity": 0.861237,
@@ -424,7 +471,8 @@
   },
   {
     "id": "57e42049-2694-4688-9203-143c5bbcdc05",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-08-04",
     "quantity": 0.382965,
@@ -433,7 +481,8 @@
   },
   {
     "id": "0dd0467c-d8cf-421c-ba87-38f024fec517",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-08-04",
     "quantity": 0.598874,
@@ -442,7 +491,8 @@
   },
   {
     "id": "64579a83-ebc6-44f7-86a1-f7c08aacfe1c",
-    "ticker": "IE00BK5BQT80",
+    "isin": "IE00BK5BQT80",
+    "ticker": "VWCE.DE",
     "name": "FTSE All-World USD (Acc)",
     "date": "2025-08-04",
     "quantity": 3.747564,
@@ -451,7 +501,8 @@
   },
   {
     "id": "80706849-d1be-4ce4-a739-d69fbe5df516",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-08-11",
     "quantity": 0.374083,
@@ -460,7 +511,8 @@
   },
   {
     "id": "85287349-f03b-4891-a5de-cf761846dbdc",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-08-11",
     "quantity": 0.594601,
@@ -469,7 +521,8 @@
   },
   {
     "id": "7cb261f7-2737-4f59-8242-2f192597f489",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-08-18",
     "quantity": 0.253062,
@@ -478,7 +531,8 @@
   },
   {
     "id": "f847a6c1-4cd1-4e43-bb26-7a1d1794ddc8",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-08-18",
     "quantity": 0.374756,
@@ -487,7 +541,8 @@
   },
   {
     "id": "7b55bece-1cd1-4f7e-a846-b8da7b78b6ad",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-08-18",
     "quantity": 0.616446,
@@ -496,7 +551,8 @@
   },
   {
     "id": "eedbb812-2b6b-4878-8544-5824944ea348",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-08-18",
     "quantity": 3.067484,
@@ -505,7 +561,8 @@
   },
   {
     "id": "426e2657-e487-40e1-a948-c039ea7e8c23",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-08-25",
     "quantity": 0.370699,
@@ -514,7 +571,8 @@
   },
   {
     "id": "4dd0fc10-35c6-4878-9cfc-dfc7a7c8d160",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-09-02",
     "quantity": 0.252143,
@@ -523,7 +581,8 @@
   },
   {
     "id": "77ab2e3c-331b-459f-9abd-05a70054703a",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-09-02",
     "quantity": 0.277932,
@@ -532,7 +591,8 @@
   },
   {
     "id": "764631ba-cc56-47d9-a4f5-b484b0fd26ec",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-09-02",
     "quantity": 0.851933,
@@ -541,7 +601,8 @@
   },
   {
     "id": "52edb927-2c7a-4b39-802b-e77d4ef9a995",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-09-02",
     "quantity": 0.362213,
@@ -550,7 +611,8 @@
   },
   {
     "id": "26338818-e981-4bed-a095-df90c5c18f74",
-    "ticker": "US1912161007",
+    "isin": "US1912161007",
+    "ticker": "CCC3.DE",
     "name": "Coca-Cola",
     "date": "2025-09-02",
     "quantity": 1.706484,
@@ -559,7 +621,8 @@
   },
   {
     "id": "3ea8eff8-46b1-435d-9698-c369bfcf876e",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-09-09",
     "quantity": 0.375883,
@@ -568,7 +631,8 @@
   },
   {
     "id": "abd8d1a1-78c2-45dc-a690-ab4fb6c38da9",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-09-16",
     "quantity": 0.24888,
@@ -577,7 +641,8 @@
   },
   {
     "id": "418f19ca-3953-46f1-b6af-e3e09f81f44c",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-09-16",
     "quantity": 0.371581,
@@ -586,7 +651,8 @@
   },
   {
     "id": "d4ab5573-7b1d-4f88-89ce-17bd2b259be3",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-09-16",
     "quantity": 3.148118,
@@ -595,7 +661,8 @@
   },
   {
     "id": "d156aa30-1c5a-4654-885d-924eadecbff4",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-09-23",
     "quantity": 0.369167,
@@ -604,7 +671,8 @@
   },
   {
     "id": "b53c310b-0c29-4d51-9316-fe8c18b5c11c",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-10-02",
     "quantity": 0.228885,
@@ -613,7 +681,8 @@
   },
   {
     "id": "3cc87de9-f316-4098-a0ee-cc67921d171c",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-10-02",
     "quantity": 0.238834,
@@ -622,7 +691,8 @@
   },
   {
     "id": "4014e688-a722-44db-8d1d-2fec6ea0c045",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-10-02",
     "quantity": 0.374587,
@@ -631,7 +701,8 @@
   },
   {
     "id": "ebfb70e2-09c7-41de-98c1-4d4f23605004",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-10-02",
     "quantity": 0.815847,
@@ -640,7 +711,8 @@
   },
   {
     "id": "b218aa92-7877-4c79-abcf-ddff42f366af",
-    "ticker": "US1912161007",
+    "isin": "US1912161007",
+    "ticker": "CCC3.DE",
     "name": "Coca-Cola",
     "date": "2025-10-02",
     "quantity": 1.763046,
@@ -649,7 +721,8 @@
   },
   {
     "id": "de62ce5f-1be2-42b7-9158-13391129d95f",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-10-09",
     "quantity": 0.378501,
@@ -658,7 +731,8 @@
   },
   {
     "id": "1e39a75d-c309-415b-a05b-329ef5b62629",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-10-16",
     "quantity": 0.2331,
@@ -667,7 +741,8 @@
   },
   {
     "id": "b7a30aeb-d9d5-4f1f-b6c2-d59a96984b2d",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-10-16",
     "quantity": 0.383494,
@@ -676,7 +751,8 @@
   },
   {
     "id": "e185cc58-0264-493b-a74e-3e2625e124f4",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2025-10-16",
     "quantity": 3.063256,
@@ -685,7 +761,8 @@
   },
   {
     "id": "4edc2bcb-82a7-442d-bd87-186396428494",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-10-23",
     "quantity": 0.368188,
@@ -694,7 +771,8 @@
   },
   {
     "id": "4d121c06-4632-476c-aac1-a65a7e54b0e4",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-10-27",
     "quantity": -12.0,
@@ -703,7 +781,8 @@
   },
   {
     "id": "8bf15c3e-a736-4540-84f7-5dac8b477cb9",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2025-10-27",
     "quantity": -0.596829,
@@ -712,6 +791,7 @@
   },
   {
     "id": "86f019f8-7683-4a4c-a418-ea07c9c6bb95",
+    "isin": "IE000Y247W99",
     "ticker": "IE000Y247W99",
     "name": "Dez. 2029",
     "date": "2025-10-27",
@@ -721,6 +801,7 @@
   },
   {
     "id": "e8161177-333f-46e5-8deb-d8a60669616a",
+    "isin": "IE000Y247W99",
     "ticker": "IE000Y247W99",
     "name": "Dez. 2029",
     "date": "2025-10-27",
@@ -730,6 +811,7 @@
   },
   {
     "id": "1fb43682-3790-4d66-8452-62bbe1b4494d",
+    "isin": "IE000Y247W99",
     "ticker": "IE000Y247W99",
     "name": "Dez. 2029",
     "date": "2025-10-27",
@@ -739,7 +821,8 @@
   },
   {
     "id": "d0beb4c9-e44d-47f5-bb81-03e64d91f911",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2025-11-03",
     "quantity": 0.212992,
@@ -748,7 +831,8 @@
   },
   {
     "id": "925deec1-94e5-4774-9efc-287eff8d4c10",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-11-03",
     "quantity": 0.203707,
@@ -757,7 +841,8 @@
   },
   {
     "id": "63f8272b-b28a-4864-90df-a78c5d308592",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-11-03",
     "quantity": 0.786856,
@@ -766,7 +851,8 @@
   },
   {
     "id": "25333c5d-7238-4ae2-afe1-0e510545478d",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2025-11-03",
     "quantity": 0.371029,
@@ -775,7 +861,8 @@
   },
   {
     "id": "5f0fac7b-dcf9-47d0-9afd-c86d0d37b3e1",
-    "ticker": "US1912161007",
+    "isin": "US1912161007",
+    "ticker": "CCC3.DE",
     "name": "Coca-Cola",
     "date": "2025-11-03",
     "quantity": 1.700391,
@@ -784,7 +871,8 @@
   },
   {
     "id": "94963790-711f-4acf-bffb-bd093bc3a7b7",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-11-17",
     "quantity": 0.16042,
@@ -793,7 +881,8 @@
   },
   {
     "id": "e223d23e-d48a-4ba7-8f3b-4c29949f12f7",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-11-17",
     "quantity": -0.03214,
@@ -802,7 +891,8 @@
   },
   {
     "id": "21e93ee5-b831-4a30-baab-0684a0bdfd4c",
-    "ticker": "US02079K1079",
+    "isin": "US02079K1079",
+    "ticker": "ABEC.DE",
     "name": "Alphabet (C)",
     "date": "2025-11-17",
     "quantity": -2.0,
@@ -811,7 +901,8 @@
   },
   {
     "id": "29cc5257-5551-4cc4-89ba-68ecf69569ce",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-11-24",
     "quantity": 0.162263,
@@ -820,7 +911,8 @@
   },
   {
     "id": "bdb0a950-4d36-45b2-8284-c2c809863da6",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-12-02",
     "quantity": 0.158538,
@@ -829,7 +921,8 @@
   },
   {
     "id": "948b37b9-cd05-4a6c-97e1-198aea5c45d2",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-12-09",
     "quantity": 0.158503,
@@ -838,7 +931,8 @@
   },
   {
     "id": "1204083c-12e3-4bdc-9d59-f3fc59d7e410",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-12-16",
     "quantity": 0.161828,
@@ -847,7 +941,8 @@
   },
   {
     "id": "fa69e595-0c12-4349-8bda-a8c51858f06d",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2025-12-23",
     "quantity": 0.159882,
@@ -856,7 +951,8 @@
   },
   {
     "id": "594ff155-3435-435c-a224-d01cae302cc6",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-01-02",
     "quantity": 0.158881,
@@ -865,7 +961,8 @@
   },
   {
     "id": "02ba2ee8-ec0a-4737-aa4a-7684ecc5fac2",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-01-05",
     "quantity": -12.0,
@@ -874,7 +971,8 @@
   },
   {
     "id": "fc04e0be-2752-481c-bace-4f4ff9277186",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-01-05",
     "quantity": -0.596829,
@@ -883,7 +981,8 @@
   },
   {
     "id": "b47a3f0d-e20d-446e-9c52-51dc4be98df3",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2026-01-05",
     "quantity": -0.558264,
@@ -892,7 +991,8 @@
   },
   {
     "id": "465f7afa-2e8c-4fc4-8d3d-cff516fcd6ac",
-    "ticker": "IE00B1TXK627",
+    "isin": "IE00B1TXK627",
+    "ticker": "IQQQ.DE",
     "name": "Global Water USD (Dist)",
     "date": "2026-01-05",
     "quantity": -20.0,
@@ -901,7 +1001,8 @@
   },
   {
     "id": "456dbcaa-6867-4619-8356-613ec7c76b96",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-01-09",
     "quantity": 0.156455,
@@ -910,7 +1011,8 @@
   },
   {
     "id": "edb701db-fdbd-4fa3-9a95-d9e77d1104ba",
-    "ticker": "IT0003132476",
+    "isin": "IT0003132476",
+    "ticker": "ENI.DE",
     "name": "Eni",
     "date": "2026-01-12",
     "quantity": 62.0,
@@ -919,7 +1021,8 @@
   },
   {
     "id": "3613e510-79a3-4077-a9bb-3f6b50fbcc09",
-    "ticker": "IT0003132476",
+    "isin": "IT0003132476",
+    "ticker": "ENI.DE",
     "name": "Eni",
     "date": "2026-01-12",
     "quantity": 0.305295,
@@ -928,6 +1031,7 @@
   },
   {
     "id": "4bbb33dd-cdb7-42a7-91d0-742739c73dad",
+    "isin": "US30231G1022",
     "ticker": "US30231G1022",
     "name": "Exxon Mobil",
     "date": "2026-01-12",
@@ -937,6 +1041,7 @@
   },
   {
     "id": "85f4cc1b-2bcd-4b66-b35d-8ba7057e88eb",
+    "isin": "US30231G1022",
     "ticker": "US30231G1022",
     "name": "Exxon Mobil",
     "date": "2026-01-12",
@@ -946,7 +1051,8 @@
   },
   {
     "id": "a6e6d58f-4b21-4e42-8c90-4d935e0ce91b",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-01-16",
     "quantity": 0.155908,
@@ -955,7 +1061,8 @@
   },
   {
     "id": "54fc4ad0-3e4e-4559-9391-c70dc111105e",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-01-23",
     "quantity": 0.158846,
@@ -963,8 +1070,29 @@
     "type": "BUY"
   },
   {
+    "id": "a1d3495b-012b-4fe0-bd0d-c93910d99caf",
+    "isin": "IE0007UPSEA3",
+    "ticker": "CBU8.DE",
+    "name": "Dez. 2026",
+    "date": "2026-01-26",
+    "quantity": 233.0,
+    "price": 4.2742,
+    "type": "BUY"
+  },
+  {
+    "id": "3d20ef99-5455-40e2-9040-b3e42813217f",
+    "isin": "IE0007UPSEA3",
+    "ticker": "CBU8.DE",
+    "name": "Dez. 2026",
+    "date": "2026-01-26",
+    "quantity": 0.961911,
+    "price": 4.2742,
+    "type": "BUY"
+  },
+  {
     "id": "7fca899c-390d-4e8c-a8f9-27adc581ee0d",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-02-02",
     "quantity": 0.158498,
@@ -973,7 +1101,8 @@
   },
   {
     "id": "e74a457e-e60c-4725-ad15-9759fdd0d852",
-    "ticker": "IE00BK5BQT80",
+    "isin": "IE00BK5BQT80",
+    "ticker": "VWCE.DE",
     "name": "FTSE All-World USD (Acc)",
     "date": "2026-02-02",
     "quantity": 3.365643,
@@ -982,6 +1111,7 @@
   },
   {
     "id": "32bf550a-b6ed-4cb3-97ce-ed21472d73d9",
+    "isin": "US30231G1022",
     "ticker": "US30231G1022",
     "name": "Exxon Mobil",
     "date": "2026-02-04",
@@ -991,6 +1121,7 @@
   },
   {
     "id": "a78e567e-8314-4182-af85-ebc906e223cb",
+    "isin": "US30231G1022",
     "ticker": "US30231G1022",
     "name": "Exxon Mobil",
     "date": "2026-02-04",
@@ -1000,7 +1131,8 @@
   },
   {
     "id": "027fac1b-0d95-484a-98e3-13788a705c8e",
-    "ticker": "US6701002056",
+    "isin": "US6701002056",
+    "ticker": "NOVA.F",
     "name": "Novo Nordisk (ADR)",
     "date": "2026-02-04",
     "quantity": 0.600246,
@@ -1009,7 +1141,8 @@
   },
   {
     "id": "dd2ca89d-940a-4c20-9d4b-86517aa46d08",
-    "ticker": "US6701002056",
+    "isin": "US6701002056",
+    "ticker": "NOVA.F",
     "name": "Novo Nordisk (ADR)",
     "date": "2026-02-04",
     "quantity": 24.0,
@@ -1018,7 +1151,8 @@
   },
   {
     "id": "b6a7237c-bba8-4e46-b5e8-5da2c1d1a319",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-02-09",
     "quantity": 0.160133,
@@ -1027,6 +1161,7 @@
   },
   {
     "id": "a9748a4c-00d9-4a68-8d26-242a18fd8da4",
+    "isin": "JP3684400009",
     "ticker": "NB5.F",
     "name": "Nitto Boseki",
     "date": "2026-02-16",
@@ -1036,6 +1171,7 @@
   },
   {
     "id": "26dc3c11-b54d-4469-8567-2ad70ae15d50",
+    "isin": "JP3684400009",
     "ticker": "NB5.F",
     "name": "Nitto Boseki",
     "date": "2026-02-16",
@@ -1045,7 +1181,8 @@
   },
   {
     "id": "7571ea81-75d2-43f7-9a69-46aa379f4b86",
-    "ticker": "LU0335044896",
+    "isin": "LU0335044896",
+    "ticker": "XEOD.DE",
     "name": "Euro Overnight Rate Swap EUR (Dist)",
     "date": "2026-02-16",
     "quantity": -7.0,
@@ -1054,7 +1191,8 @@
   },
   {
     "id": "106a6ede-697c-4596-8d26-556e303dd13f",
-    "ticker": "LU0335044896",
+    "isin": "LU0335044896",
+    "ticker": "XEOD.DE",
     "name": "Euro Overnight Rate Swap EUR (Dist)",
     "date": "2026-02-16",
     "quantity": -0.855706,
@@ -1063,6 +1201,7 @@
   },
   {
     "id": "97479f47-3bb7-4ded-8689-95f416733d16",
+    "isin": "JP3684400009",
     "ticker": "NB5.F",
     "name": "Nitto Boseki",
     "date": "2026-02-16",
@@ -1072,6 +1211,7 @@
   },
   {
     "id": "fffc393b-fc76-4497-b13a-6c72cdfdda2b",
+    "isin": "JP3684400009",
     "ticker": "NB5.F",
     "name": "Nitto Boseki",
     "date": "2026-02-16",
@@ -1081,7 +1221,8 @@
   },
   {
     "id": "779dedd6-9e9a-491d-b596-8be7bd3ec883",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-02-16",
     "quantity": 0.161691,
@@ -1090,7 +1231,8 @@
   },
   {
     "id": "ce5c0df2-fd10-4723-baed-46d7ef9bb2cb",
-    "ticker": "IT0003132476",
+    "isin": "IT0003132476",
+    "ticker": "ENI.DE",
     "name": "Eni",
     "date": "2026-02-17",
     "quantity": -0.305295,
@@ -1099,7 +1241,8 @@
   },
   {
     "id": "1b8210f6-5f97-4859-bb67-7acbbe37812f",
-    "ticker": "IT0003132476",
+    "isin": "IT0003132476",
+    "ticker": "ENI.DE",
     "name": "Eni",
     "date": "2026-02-17",
     "quantity": -62.0,
@@ -1108,7 +1251,8 @@
   },
   {
     "id": "0f42a6cf-06ec-47ce-bec7-4400b69f79b2",
-    "ticker": "US04010E1091",
+    "isin": "US04010E1091",
+    "ticker": "1AW.DE",
     "name": "Argan",
     "date": "2026-02-17",
     "quantity": 2.857142,
@@ -1117,7 +1261,8 @@
   },
   {
     "id": "76446852-dc5d-4ff6-ae39-56258ef2ba49",
-    "ticker": "US1096411004",
+    "isin": "US1096411004",
+    "ticker": "BKJ.F",
     "name": "Brinker International",
     "date": "2026-02-17",
     "quantity": 3.0,
@@ -1126,7 +1271,8 @@
   },
   {
     "id": "63350212-5657-492c-a9d3-ef1ad9a999d4",
-    "ticker": "US1096411004",
+    "isin": "US1096411004",
+    "ticker": "BKJ.F",
     "name": "Brinker International",
     "date": "2026-02-17",
     "quantity": 0.649635,
@@ -1135,7 +1281,8 @@
   },
   {
     "id": "842cd16a-7223-42c5-9733-a27a22d544ac",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-02-23",
     "quantity": 0.159591,
@@ -1144,7 +1291,8 @@
   },
   {
     "id": "f289c689-e682-49ed-a8d7-c8bb289fde0f",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2026-03-02",
     "quantity": -4.0,
@@ -1153,7 +1301,8 @@
   },
   {
     "id": "64f1b955-1f19-49a9-8751-0af507763c7b",
-    "ticker": "US1667641005",
+    "isin": "US1667641005",
+    "ticker": "CHV.DE",
     "name": "Chevron",
     "date": "2026-03-02",
     "quantity": -0.857146,
@@ -1162,7 +1311,8 @@
   },
   {
     "id": "a0ff26a6-2492-40df-9cc0-7bb34b538efa",
-    "ticker": "US03823U1025",
+    "isin": "US03823U1025",
+    "ticker": "A59.DE",
     "name": "Applied Optoelectronics",
     "date": "2026-03-02",
     "quantity": 0.95238,
@@ -1171,7 +1321,8 @@
   },
   {
     "id": "d28025c0-8abe-4946-86b8-7724fbe3e5be",
-    "ticker": "US03823U1025",
+    "isin": "US03823U1025",
+    "ticker": "A59.DE",
     "name": "Applied Optoelectronics",
     "date": "2026-03-02",
     "quantity": 5.0,
@@ -1180,7 +1331,8 @@
   },
   {
     "id": "b6a71606-39f1-4878-bfd7-b985a3b5220d",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-03-02",
     "quantity": 0.15955,
@@ -1189,7 +1341,8 @@
   },
   {
     "id": "9f5f111d-4c2b-4928-b4d3-a42f2b9d5297",
-    "ticker": "US88160R1014",
+    "isin": "US88160R1014",
+    "ticker": "TL0.DE",
     "name": "Tesla",
     "date": "2026-03-05",
     "quantity": -0.0247,
@@ -1198,7 +1351,8 @@
   },
   {
     "id": "f18f3c00-4214-4bef-a0ab-7c5af52720a7",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-03-09",
     "quantity": 0.241849,
@@ -1207,7 +1361,8 @@
   },
   {
     "id": "91974a12-7d98-4272-bcb9-19ad301e7aa2",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-03-16",
     "quantity": 4.716981,
@@ -1216,7 +1371,8 @@
   },
   {
     "id": "9f0b242f-ab90-4568-b3d2-ef4eb516d066",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-03-16",
     "quantity": 0.165316,
@@ -1225,7 +1381,8 @@
   },
   {
     "id": "d625f2fe-30dd-4c59-a0cb-4e7e4a601d1f",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-03-16",
     "quantity": 0.09441,
@@ -1234,7 +1391,8 @@
   },
   {
     "id": "1be9e856-3a47-4d84-9b41-3c3e6f9fa9d6",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-03-16",
     "quantity": 0.239463,
@@ -1243,7 +1401,8 @@
   },
   {
     "id": "39f1058d-0b98-49a0-a737-1cae2947ddd7",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-03-16",
     "quantity": 0.113378,
@@ -1252,7 +1411,8 @@
   },
   {
     "id": "aa2403a5-fc84-4301-a779-f97dd0bec913",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-03-23",
     "quantity": 3.496503,
@@ -1261,7 +1421,8 @@
   },
   {
     "id": "f1d31042-d444-4744-9e8d-4027771e2376",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-03-23",
     "quantity": 0.095657,
@@ -1270,7 +1431,8 @@
   },
   {
     "id": "3f7111ed-cca4-42e2-96eb-0eab5f60c086",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-03-23",
     "quantity": 0.244698,
@@ -1279,7 +1441,8 @@
   },
   {
     "id": "ee08b088-f839-4466-840a-a57ced258979",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-03-23",
     "quantity": 0.155884,
@@ -1288,7 +1451,8 @@
   },
   {
     "id": "5d6d0931-16d1-4330-bc85-12ac133f1896",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-03-23",
     "quantity": 0.115074,
@@ -1297,6 +1461,7 @@
   },
   {
     "id": "b2e0fe39-0c81-4a39-b21f-b07b3460f8dd",
+    "isin": "IE000Y247W99",
     "ticker": "IE000Y247W99",
     "name": "Dez. 2029",
     "date": "2026-03-25",
@@ -1306,6 +1471,7 @@
   },
   {
     "id": "7478086a-654e-4382-9bd7-af71685b8e9a",
+    "isin": "IE000Y247W99",
     "ticker": "IE000Y247W99",
     "name": "Dez. 2029",
     "date": "2026-03-25",
@@ -1315,7 +1481,8 @@
   },
   {
     "id": "c019643b-0c51-4048-9e0d-2081a252c39a",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-03-25",
     "quantity": 1.0,
@@ -1324,7 +1491,8 @@
   },
   {
     "id": "c42b8645-2356-460f-b5e5-565aa0cd3412",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-03-25",
     "quantity": 0.22397,
@@ -1333,7 +1501,8 @@
   },
   {
     "id": "2e4d2df7-3144-4417-92ed-68d300129c20",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-04-02",
     "quantity": 3.546099,
@@ -1342,7 +1511,8 @@
   },
   {
     "id": "7c7ed482-54ff-418f-92bb-a8715646178b",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-04-02",
     "quantity": 0.167813,
@@ -1351,7 +1521,8 @@
   },
   {
     "id": "7fb76fa9-59b9-452a-bd23-27c785b6dcbe",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-04-02",
     "quantity": 0.098328,
@@ -1360,7 +1531,8 @@
   },
   {
     "id": "f0d9c855-b89c-44b8-b29a-c721f37f1fc8",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-04-02",
     "quantity": 0.246921,
@@ -1369,7 +1541,8 @@
   },
   {
     "id": "39bc4318-5ab7-491f-ab81-2fe18a34a5e5",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-04-02",
     "quantity": 0.114285,
@@ -1378,7 +1551,8 @@
   },
   {
     "id": "052bca25-19d4-462f-8bf0-9ba9c0dbb37b",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-04-09",
     "quantity": 3.184713,
@@ -1387,7 +1561,8 @@
   },
   {
     "id": "eedfff4d-8460-4ad0-a48f-b40a8d368a02",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-04-09",
     "quantity": 0.093231,
@@ -1396,7 +1571,8 @@
   },
   {
     "id": "d2e62969-f3ed-4de5-87d3-8ee8f881f0a4",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-04-09",
     "quantity": 0.149031,
@@ -1405,7 +1581,8 @@
   },
   {
     "id": "081b5a18-841b-4907-bc93-893e750a27f6",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-04-09",
     "quantity": 0.240762,
@@ -1414,7 +1591,8 @@
   },
   {
     "id": "6056042a-ebf0-4387-8e29-cdc8049a5ba1",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-04-09",
     "quantity": 0.113173,
@@ -1423,7 +1601,8 @@
   },
   {
     "id": "a6c6cce7-d466-4656-a289-ca01c0be8fff",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-04-16",
     "quantity": 3.086419,
@@ -1432,7 +1611,8 @@
   },
   {
     "id": "7264a74d-98fc-410b-b3c8-6c1d158537af",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-04-16",
     "quantity": 0.152183,
@@ -1441,7 +1621,8 @@
   },
   {
     "id": "4e1752a3-3cc4-4567-80d8-fe9ee20d4ccb",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-04-16",
     "quantity": 0.087412,
@@ -1450,7 +1631,8 @@
   },
   {
     "id": "45314ace-890c-4d07-88b7-d730d356aaca",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-04-16",
     "quantity": 0.234323,
@@ -1459,7 +1641,8 @@
   },
   {
     "id": "d3fb214f-7873-477a-9311-e85e34c9ca8b",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-04-16",
     "quantity": 0.112334,
@@ -1468,7 +1651,8 @@
   },
   {
     "id": "0b07a922-9753-4040-9a8e-e1cfed13f399",
-    "ticker": "IT0003856405",
+    "isin": "IT0003856405",
+    "ticker": "FMNB.DE",
     "name": "Leonardo-Finmeccanica",
     "date": "2026-04-22",
     "quantity": 27.507793,
@@ -1477,7 +1661,8 @@
   },
   {
     "id": "019da9be-e319-4ff7-ad77-643ac8c42944",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-04-23",
     "quantity": 3.086419,
@@ -1486,7 +1671,8 @@
   },
   {
     "id": "b00ba74e-00e8-4d62-a0e7-db0727bfc3de",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-04-23",
     "quantity": 0.085999,
@@ -1495,7 +1681,8 @@
   },
   {
     "id": "99c0baac-f85a-4b7c-a18f-9a0880577e89",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-04-23",
     "quantity": 0.141924,
@@ -1504,7 +1691,8 @@
   },
   {
     "id": "2af36896-4b0e-4f7f-a800-98859692bad7",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-04-23",
     "quantity": 0.229077,
@@ -1513,7 +1701,8 @@
   },
   {
     "id": "2df147fc-0f4c-4860-b169-bdc775ecffe9",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-04-23",
     "quantity": 0.106609,
@@ -1522,7 +1711,8 @@
   },
   {
     "id": "2819849d-c27b-44a5-af77-236d769f7276",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-05-04",
     "quantity": 3.205128,
@@ -1531,7 +1721,8 @@
   },
   {
     "id": "5ef95554-4f86-47b5-ba28-f5c5904728e5",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-05-04",
     "quantity": 0.147557,
@@ -1540,7 +1731,8 @@
   },
   {
     "id": "22d7357b-8dff-4d1b-88a7-fd7e5cffdd54",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-05-04",
     "quantity": 0.07671,
@@ -1549,7 +1741,8 @@
   },
   {
     "id": "2de9ae5a-0b41-4bd9-bc3c-ea8bc125d1b9",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-05-04",
     "quantity": 0.225985,
@@ -1558,7 +1751,8 @@
   },
   {
     "id": "8071de55-fb4f-46dd-9b53-d81f409aa8d9",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-05-04",
     "quantity": 0.105932,
@@ -1567,7 +1761,8 @@
   },
   {
     "id": "c83a2588-f33d-4389-9e91-1734854d5cc8",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-05-11",
     "quantity": 2.97619,
@@ -1576,7 +1771,8 @@
   },
   {
     "id": "3180b6f8-9204-43cd-9693-c0ee4526580a",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-05-11",
     "quantity": 0.074283,
@@ -1585,7 +1781,8 @@
   },
   {
     "id": "e116f666-2cec-49af-bff4-08c47f3319d0",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-05-11",
     "quantity": 0.132872,
@@ -1594,7 +1791,8 @@
   },
   {
     "id": "670b25e1-dd85-4877-8482-9c10229e6e54",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-05-11",
     "quantity": 0.221926,
@@ -1603,7 +1801,8 @@
   },
   {
     "id": "e2089084-8cdb-4d61-9522-ddb531a13dc8",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-05-11",
     "quantity": 0.100623,
@@ -1612,7 +1811,8 @@
   },
   {
     "id": "3786a2fa-7251-480a-b1ed-5f99782b9f6c",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-05-18",
     "quantity": 2.747252,
@@ -1621,7 +1821,8 @@
   },
   {
     "id": "1121ac96-f62b-40f0-aeb0-b95305371e7f",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-05-18",
     "quantity": 0.138007,
@@ -1630,7 +1831,8 @@
   },
   {
     "id": "8b00b88c-ebdd-409e-b27e-6a4a001ff356",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-05-18",
     "quantity": 0.071911,
@@ -1639,7 +1841,8 @@
   },
   {
     "id": "3a73ad0c-2993-4bb2-b445-18fccefd67f4",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-05-18",
     "quantity": 0.218907,
@@ -1648,7 +1851,8 @@
   },
   {
     "id": "9414f13f-b9be-4b3d-bff0-dc67b89b0f2f",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-05-18",
     "quantity": 0.097656,
@@ -1657,7 +1861,8 @@
   },
   {
     "id": "6cc88faf-d41a-4c86-b8a5-c04e33500347",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-05-18",
     "quantity": 2.50941,
@@ -1666,7 +1871,8 @@
   },
   {
     "id": "b71d9555-2a89-4a18-ba89-e14bdba94561",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-05-25",
     "quantity": 2.392344,
@@ -1675,7 +1881,8 @@
   },
   {
     "id": "2f55bef2-911c-4a69-a151-6fe09e118a3c",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-05-25",
     "quantity": 0.074571,
@@ -1684,7 +1891,8 @@
   },
   {
     "id": "b41e9633-1810-45bc-b9b6-f9d794ebb235",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-05-25",
     "quantity": 0.130667,
@@ -1693,7 +1901,8 @@
   },
   {
     "id": "3daaa8bd-8bf9-4196-b459-607379c23143",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-05-25",
     "quantity": 0.215146,
@@ -1702,7 +1911,8 @@
   },
   {
     "id": "40f4e60a-ff80-4d9d-8124-4a3a98b7b69b",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-05-25",
     "quantity": 0.093492,
@@ -1711,7 +1921,8 @@
   },
   {
     "id": "97ffbfb1-b927-48eb-8ae2-a990ccc29065",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-05-25",
     "quantity": 2.515723,
@@ -1720,7 +1931,8 @@
   },
   {
     "id": "530c86e9-0fe1-4fb4-9aca-e6e3a617a265",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-06-02",
     "quantity": 2.369668,
@@ -1729,7 +1941,8 @@
   },
   {
     "id": "83e659c1-5b89-4c9e-802d-ae676b14d246",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-06-02",
     "quantity": 0.122085,
@@ -1738,7 +1951,8 @@
   },
   {
     "id": "15d842ac-6a59-4e2a-8fc8-410e018cc113",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-06-02",
     "quantity": 0.080347,
@@ -1747,7 +1961,8 @@
   },
   {
     "id": "3fb6680c-e8eb-4a87-97c2-3917693704d6",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-06-02",
     "quantity": 0.213614,
@@ -1756,7 +1971,8 @@
   },
   {
     "id": "630c3479-9d90-49f5-9633-e6ae6ca2b731",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-06-02",
     "quantity": 0.094073,
@@ -1765,7 +1981,8 @@
   },
   {
     "id": "9f03d8cf-0c27-43cb-b14f-0fd074997e06",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-06-02",
     "quantity": 2.656042,
@@ -1774,7 +1991,8 @@
   },
   {
     "id": "045e9759-013a-4f1b-a29f-b092e73b6205",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-06-08",
     "quantity": 16.778523,
@@ -1783,7 +2001,8 @@
   },
   {
     "id": "b258e50c-06ef-43c8-8d70-902644d88eea",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-06-09",
     "quantity": 3.40136,
@@ -1792,7 +2011,8 @@
   },
   {
     "id": "202e8242-0ee4-4390-ba2c-e1d2ff44e12a",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-06-09",
     "quantity": 0.110314,
@@ -1801,7 +2021,8 @@
   },
   {
     "id": "5065b3e4-f05d-4fe3-87d5-2ce728ef05c5",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-06-09",
     "quantity": 0.078027,
@@ -1810,7 +2031,8 @@
   },
   {
     "id": "4ccd6945-44db-4eef-b277-a5142d640744",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-06-09",
     "quantity": 0.098755,
@@ -1819,7 +2041,8 @@
   },
   {
     "id": "dbd093b4-89ca-4e47-b2bb-426fc168a120",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-06-09",
     "quantity": 0.217303,
@@ -1828,7 +2051,8 @@
   },
   {
     "id": "5077b68c-e399-4f91-8061-e73075b8ae67",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-06-09",
     "quantity": 2.645502,
@@ -1837,7 +2061,8 @@
   },
   {
     "id": "9e1f35af-c68a-4231-9dda-40336007cf7c",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-06-15",
     "quantity": 17.985611,
@@ -1846,6 +2071,7 @@
   },
   {
     "id": "a59d4927-e3ed-4194-9a78-26f89925221d",
+    "isin": "JP3684400009",
     "ticker": "NB5.F",
     "name": "Nitto Boseki",
     "date": "2026-06-15",
@@ -1855,7 +2081,8 @@
   },
   {
     "id": "f183ea3f-b3aa-4ffb-be01-7d0ceea04529",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-06-16",
     "quantity": 0.098039,
@@ -1864,7 +2091,8 @@
   },
   {
     "id": "f39d9853-fc26-44ad-b037-7ef163786206",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-06-16",
     "quantity": 0.078616,
@@ -1873,7 +2101,8 @@
   },
   {
     "id": "b7c8eed2-fbba-473c-b9f3-1746a28fbe80",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-06-16",
     "quantity": 0.097389,
@@ -1882,7 +2111,8 @@
   },
   {
     "id": "d635b394-de72-432a-a2c3-3ba60540bc2e",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-06-16",
     "quantity": 21.0,
@@ -1891,7 +2121,8 @@
   },
   {
     "id": "de1e2758-c269-400e-879f-06dd6fe153de",
-    "ticker": "US72703X1063",
+    "isin": "US72703X1063",
+    "ticker": "85H1.DE",
     "name": "Planet Labs PBC",
     "date": "2026-06-16",
     "quantity": 0.367521,
@@ -1900,7 +2131,8 @@
   },
   {
     "id": "33dabe8d-7109-4fc0-96a1-068b8013fa5d",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-06-16",
     "quantity": -0.811692,
@@ -1909,7 +2141,8 @@
   },
   {
     "id": "c62d6471-5901-4578-9919-f556ff81c7b6",
-    "ticker": "US0382221051",
+    "isin": "US0382221051",
+    "ticker": "AP2.DE",
     "name": "Applied Materials",
     "date": "2026-06-16",
     "quantity": -1.0,
@@ -1918,7 +2151,8 @@
   },
   {
     "id": "a2a0d126-8789-4ad3-b112-2b5539178779",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-06-16",
     "quantity": 0.214181,
@@ -1927,7 +2161,8 @@
   },
   {
     "id": "e22f5640-1138-4ff0-bd88-b7d70c284db6",
-    "ticker": "US6311031081",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
     "name": "Nasdaq",
     "date": "2026-06-16",
     "quantity": 2.621231,
@@ -1936,7 +2171,8 @@
   },
   {
     "id": "d2c22749-4a82-428b-9d1e-4be42fc9afae",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-06-23",
     "quantity": 0.08202,
@@ -1945,7 +2181,8 @@
   },
   {
     "id": "956185d9-b62d-4e8b-bde7-932c4db65dda",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-06-23",
     "quantity": 0.094948,
@@ -1954,7 +2191,8 @@
   },
   {
     "id": "b2531996-ebaa-45d3-b015-02ca292bb9b8",
-    "ticker": "US04010E1091",
+    "isin": "US04010E1091",
+    "ticker": "1AW.DE",
     "name": "Argan",
     "date": "2026-06-26",
     "quantity": -2.857142,
@@ -1963,7 +2201,8 @@
   },
   {
     "id": "260d1778-01b2-4fa9-ace0-3b24d2b2686b",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-07-02",
     "quantity": 0.078702,
@@ -1972,7 +2211,8 @@
   },
   {
     "id": "51135aa9-d792-41ad-98dc-34243db40743",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-07-02",
     "quantity": 0.353097,
@@ -1981,7 +2221,8 @@
   },
   {
     "id": "d5acef53-45b0-45f6-a831-900fbd89a3bb",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-07-02",
     "quantity": 0.093949,
@@ -1990,7 +2231,8 @@
   },
   {
     "id": "dc4ec7b2-d521-4377-a3b7-105adce68777",
-    "ticker": "IE00B4L5Y983",
+    "isin": "IE00B4L5Y983",
+    "ticker": "EUNL.DE",
     "name": "Core MSCI World USD (Acc)",
     "date": "2026-07-09",
     "quantity": -1.889287,
@@ -1999,7 +2241,8 @@
   },
   {
     "id": "ed7e75b6-f471-42bb-a560-25416e2487ae",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-07-09",
     "quantity": 0.080102,
@@ -2008,7 +2251,8 @@
   },
   {
     "id": "a57c0931-327c-4233-8d6e-059b676df9dd",
-    "ticker": "IT0005599938",
+    "isin": "IT0005599938",
+    "ticker": "1F80.DE",
     "name": "Fincantieri",
     "date": "2026-07-09",
     "quantity": 214.0,
@@ -2017,7 +2261,8 @@
   },
   {
     "id": "320ab9e0-1140-4e93-93c9-c3831d61591b",
-    "ticker": "IT0005599938",
+    "isin": "IT0005599938",
+    "ticker": "1F80.DE",
     "name": "Fincantieri",
     "date": "2026-07-09",
     "quantity": 0.132762,
@@ -2026,7 +2271,8 @@
   },
   {
     "id": "1b881ef8-6dfd-4f1b-ad78-02b950538a61",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-07-09",
     "quantity": 0.353736,
@@ -2035,7 +2281,8 @@
   },
   {
     "id": "b7cfc72b-0592-4b30-a446-a9d389d7b3f4",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-07-09",
     "quantity": 0.091877,
@@ -2044,7 +2291,8 @@
   },
   {
     "id": "900fe8bb-4447-4764-a6f4-24f034a7ba8e",
-    "ticker": "US02079K3059",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
     "name": "Alphabet (A)",
     "date": "2026-07-16",
     "quantity": 0.077124,
@@ -2053,7 +2301,8 @@
   },
   {
     "id": "154e6361-dfc4-4d73-89d2-361a7562bae8",
-    "ticker": "IE00B5BMR087",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
     "name": "Core S&P 500 USD (Acc)",
     "date": "2026-07-16",
     "quantity": 0.351459,
@@ -2062,11 +2311,232 @@
   },
   {
     "id": "4c2c6b34-855a-4670-9cc7-765923531729",
-    "ticker": "US0378331005",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
     "name": "Apple",
     "date": "2026-07-16",
     "quantity": 0.086865,
     "price": 287.8,
+    "type": "BUY"
+  },
+  {
+    "id": "a7186d4d-1651-4cd6-84cf-fd21a86eb223",
+    "isin": "US0378331005",
+    "ticker": "APC.DE",
+    "name": "Apple",
+    "date": "2026-07-22",
+    "quantity": -5.962804,
+    "price": 284.6,
+    "type": "SELL"
+  },
+  {
+    "id": "9b5844a5-4d52-4887-8bae-8fcf1a6f9c26",
+    "isin": "IT0003856405",
+    "ticker": "FMNB.DE",
+    "name": "Leonardo-Finmeccanica",
+    "date": "2026-07-22",
+    "quantity": 19.0,
+    "price": 51.28,
+    "type": "BUY"
+  },
+  {
+    "id": "7fdd8957-a111-42c3-9f85-773b3dafddcf",
+    "isin": "IT0003856405",
+    "ticker": "FMNB.DE",
+    "name": "Leonardo-Finmeccanica",
+    "date": "2026-07-22",
+    "quantity": 0.50078,
+    "price": 51.28,
+    "type": "BUY"
+  },
+  {
+    "id": "c09be165-200d-4c1c-93c9-59dad8f17a96",
+    "isin": "IT0005599938",
+    "ticker": "1F80.DE",
+    "name": "Fincantieri",
+    "date": "2026-07-22",
+    "quantity": 76.0,
+    "price": 13.035,
+    "type": "BUY"
+  },
+  {
+    "id": "be6d6fec-c176-46c5-9365-12b21719be29",
+    "isin": "IT0005599938",
+    "ticker": "1F80.DE",
+    "name": "Fincantieri",
+    "date": "2026-07-22",
+    "quantity": 0.716532,
+    "price": 13.035,
+    "type": "BUY"
+  },
+  {
+    "id": "12630036-c185-4728-8e34-f7783da940b4",
+    "isin": "IE00BK5BQT80",
+    "ticker": "VWCE.DE",
+    "name": "FTSE All-World USD (Acc)",
+    "date": "2026-07-23",
+    "quantity": -14.777988,
+    "price": 164.66,
+    "type": "SELL"
+  },
+  {
+    "id": "91d5b09c-723b-4550-a02d-b778f91ea38f",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
+    "name": "Core S&P 500 USD (Acc)",
+    "date": "2026-07-23",
+    "quantity": 0.355659,
+    "price": 702.92,
+    "type": "BUY"
+  },
+  {
+    "id": "8bb1dc43-d288-444d-a838-2669099d880f",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
+    "name": "Alphabet (A)",
+    "date": "2026-08-03",
+    "quantity": 0.307976,
+    "price": 324.7,
+    "type": "BUY"
+  },
+  {
+    "id": "d91805bd-ddae-4887-a137-67d44cc9692d",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
+    "name": "Core S&P 500 USD (Acc)",
+    "date": "2026-08-03",
+    "quantity": 0.353816,
+    "price": 706.58,
+    "type": "BUY"
+  },
+  {
+    "id": "4e08c55b-e91a-416c-9e50-52bc6189731c",
+    "isin": "US1912161007",
+    "ticker": "CCC3.DE",
+    "name": "Coca-Cola",
+    "date": "2026-08-03",
+    "quantity": 0.330512,
+    "price": 75.64,
+    "type": "BUY"
+  },
+  {
+    "id": "701ab479-02c2-489c-8106-eaaec6756223",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
+    "name": "Alphabet (A)",
+    "date": "2026-08-10",
+    "quantity": 0.326317,
+    "price": 306.45,
+    "type": "BUY"
+  },
+  {
+    "id": "a66418cd-f0c2-485f-9fd7-fa969cd7c865",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
+    "name": "Core S&P 500 USD (Acc)",
+    "date": "2026-08-10",
+    "quantity": 0.345179,
+    "price": 724.26,
+    "type": "BUY"
+  },
+  {
+    "id": "ca0a0c78-02aa-4056-ab69-48a083e47962",
+    "isin": "US1912161007",
+    "ticker": "CCC3.DE",
+    "name": "Coca-Cola",
+    "date": "2026-08-10",
+    "quantity": 0.331917,
+    "price": 75.32,
+    "type": "BUY"
+  },
+  {
+    "id": "ca8b85a9-f219-46a2-b7c6-e4c4292029d8",
+    "isin": "US1096411004",
+    "ticker": "BKJ.F",
+    "name": "Brinker International",
+    "date": "2026-08-11",
+    "quantity": -3.649635,
+    "price": 194.3,
+    "type": "SELL"
+  },
+  {
+    "id": "433b400d-ff3b-4192-a83e-7f0d0f23b976",
+    "isin": "US6311031081",
+    "ticker": "NAQ.DE",
+    "name": "Nasdaq",
+    "date": "2026-08-17",
+    "quantity": -12.947908,
+    "price": 83.2,
+    "type": "SELL"
+  },
+  {
+    "id": "91e7c4e3-6e12-4200-9b28-de450379e60f",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
+    "name": "Core S&P 500 USD (Acc)",
+    "date": "2026-08-17",
+    "quantity": -4.143074,
+    "price": 724.1,
+    "type": "SELL"
+  },
+  {
+    "id": "71a2b346-98bd-4562-b669-62101a050241",
+    "isin": "JP3684400009",
+    "ticker": "NB5.F",
+    "name": "Nitto Boseki",
+    "date": "2026-08-17",
+    "quantity": 53.475935,
+    "price": 18.7,
+    "type": "BUY"
+  },
+  {
+    "id": "7ab5fd76-4988-488c-9bf2-38a65cbb4c06",
+    "isin": "US03823U1025",
+    "ticker": "A59.DE",
+    "name": "Applied Optoelectronics",
+    "date": "2026-08-17",
+    "quantity": -5.95238,
+    "price": 132.26,
+    "type": "SELL"
+  },
+  {
+    "id": "eb9195e0-a90c-4713-9e01-697ac9ac4ba4",
+    "isin": "US84615Q1031",
+    "ticker": "SPX.DE",
+    "name": "SpaceX",
+    "date": "2026-08-17",
+    "quantity": 8.181966,
+    "price": 122.22,
+    "type": "BUY"
+  },
+  {
+    "id": "e162463b-2664-44af-8cb3-f77a0a605add",
+    "isin": "US02079K3059",
+    "ticker": "ABEA.DE",
+    "name": "Alphabet (A)",
+    "date": "2026-08-17",
+    "quantity": 0.336304,
+    "price": 297.35,
+    "type": "BUY"
+  },
+  {
+    "id": "306188b2-94c1-44f0-a1d0-a53ab6cb8194",
+    "isin": "IE00B5BMR087",
+    "ticker": "SXR8.DE",
+    "name": "Core S&P 500 USD (Acc)",
+    "date": "2026-08-17",
+    "quantity": 0.345953,
+    "price": 722.64,
+    "type": "BUY"
+  },
+  {
+    "id": "9da1df3d-d4b3-47e8-b895-f93b1ea19ca6",
+    "isin": "US1912161007",
+    "ticker": "CCC3.DE",
+    "name": "Coca-Cola",
+    "date": "2026-08-17",
+    "quantity": 0.329902,
+    "price": 75.78,
     "type": "BUY"
   }
 ]

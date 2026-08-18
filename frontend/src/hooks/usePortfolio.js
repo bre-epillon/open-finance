@@ -1,6 +1,35 @@
 import { useState, useEffect, useMemo } from 'react';
 import initialTransactions from '../parsed_transactions.json';
 
+// transactions/parse_csv.py now resolves each ISIN to a conventional ticker automatically
+// (via OpenFIGI) instead of a fixed list, so that list can change every time the CSV is
+// re-parsed. Rather than hand-mirroring it here (which drifts the moment new assets are
+// added), derive the isin -> ticker map straight from the bundled seed file -- it always
+// reflects whatever parse_csv.py last resolved.
+// The backend (api/tickers.json, corporate_actions, equity_prices) still tracks these
+// assets by ISIN, so split-matching below keys off `isin` and only falls back to
+// `ticker` for older transactions parsed before this mapping existed.
+const ISIN_TICKER_MAP = Object.fromEntries(
+  (initialTransactions || [])
+    .filter((t) => t.isin && t.ticker && t.isin !== t.ticker)
+    .map((t) => [t.isin, t.ticker])
+);
+
+// One-time migration: a transaction whose `ticker` is still a raw ISIN (the old
+// convention) gets moved onto its conventional ticker, with the ISIN preserved
+// separately. Naturally idempotent -- once migrated, `ticker` no longer matches an
+// ISIN key, so re-running this is a no-op.
+export function reconcileTickers(transactions) {
+  let changed = false;
+  const next = transactions.map((tx) => {
+    const conventional = ISIN_TICKER_MAP[tx.ticker];
+    if (!conventional) return tx;
+    changed = true;
+    return { ...tx, isin: tx.isin || tx.ticker, ticker: conventional };
+  });
+  return changed ? next : transactions;
+}
+
 // Rescales any transaction that predates a stock split it hasn't been adjusted for yet.
 // `adjustedSplits` is tagged per-transaction (not tracked globally) so a transaction added
 // later, backdated before a split that was already processed, still gets caught next run.
@@ -8,6 +37,7 @@ export function applySplitsToTransactions(transactions, splits) {
   let changed = false;
   const next = transactions.map((tx) => {
     const applied = new Set(tx.adjustedSplits || []);
+    const txKey = (tx.isin || tx.ticker).toUpperCase();
     let quantity = tx.quantity;
     let price = tx.price;
     let touched = false;
@@ -15,7 +45,7 @@ export function applySplitsToTransactions(transactions, splits) {
     splits.forEach((s) => {
       const key = `${s.ticker}|${s.effective_date}`;
       if (applied.has(key)) return;
-      if (tx.ticker.toUpperCase() !== s.ticker.toUpperCase()) return;
+      if (txKey !== s.ticker.toUpperCase()) return;
       if (new Date(tx.date) >= new Date(s.effective_date)) return;
 
       quantity *= s.ratio;
@@ -45,13 +75,13 @@ export function usePortfolio(apiBase, onTrackNewTicker, trackedTickers) {
           }
         });
         
-        return parsed.map(tx => ({
+        return reconcileTickers(parsed.map(tx => ({
           ...tx,
           name: tx.name && tx.name !== tx.ticker ? tx.name : (nameMap[tx.ticker.toUpperCase()] || tx.ticker)
-        }));
+        })));
       }
     }
-    return initialTransactions || [];
+    return reconcileTickers(initialTransactions || []);
   });
 
   // Persist transactions

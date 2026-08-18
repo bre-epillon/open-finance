@@ -1,0 +1,121 @@
+[
+  {
+    "id": "d94299b1-4b4c-44c1-9024-ffd2bfa16208",
+    "date": "2025-01-02",
+    "amount": 10000.0,
+    "currency": "EUR",
+    "description": "Account opening TR"
+  },
+  {
+    "id": "6d1e333a-06a2-4048-a925-d87f16e64710",
+    "date": "2025-02-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "9304ec8f-4c78-46e2-9ad3-4e8a9f72afa4",
+    "date": "2025-03-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "c973fc58-8f1a-4545-b5d4-6896ac2934c8",
+    "date": "2025-04-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "11e36715-867b-4026-a56f-b8d8a536bb7d",
+    "date": "2025-04-11",
+    "amount": 300.0,
+    "currency": "EUR",
+    "description": "Bonus"
+  },
+  {
+    "id": "e574e3ab-4172-4b15-987d-a8a17a2aaf9c",
+    "date": "2025-04-15",
+    "amount": 3500.0,
+    "currency": "EUR",
+    "description": "Saving account"
+  },
+  {
+    "id": "704866c4-934e-498b-91da-3d24d974fd19",
+    "date": "2025-04-22",
+    "amount": 420.0,
+    "currency": "EUR",
+    "description": "Taxes retribution"
+  },
+  {
+    "id": "b5527ad7-da35-4224-9c19-9f3668bb9d16",
+    "date": "2025-05-05",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "e1fcf276-29d3-4280-9ea8-80eb45def1ba",
+    "date": "2025-06-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "9e78999d-b13f-4726-be02-02f9ef4402a1",
+    "date": "2025-07-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "fa838fc2-89b7-4327-836b-c0ecd96dd7b4",
+    "date": "2025-07-31",
+    "amount": 2000.0,
+    "currency": "EUR",
+    "description": "Investment"
+  },
+  {
+    "id": "a87639a7-f69f-4b87-9c68-48b7d1fff4dc",
+    "date": "2025-08-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "7bd668c1-f39d-4f8a-801b-f9ad10306442",
+    "date": "2025-09-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "4351df26-a161-49ed-9233-1fcbeb01ca79",
+    "date": "2025-10-06",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "e7992a73-631c-4f9b-8779-9f14a4eb1017",
+    "date": "2025-11-03",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Investment"
+  },
+  {
+    "id": "497619be-e906-4548-8500-1b136f7cebbe",
+    "date": "2025-11-03",
+    "amount": 1000.0,
+    "currency": "EUR",
+    "description": "Investment"
+  },
+  {
+    "id": "e92af46f-2a39-41c3-ae5b-968b50e0f935",
+    "date": "2025-11-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  }
+]
