@@ -1,6 +1,36 @@
 import { useState, useEffect, useMemo } from 'react';
 import initialTransactions from '../parsed_transactions.json';
 
+// Rescales any transaction that predates a stock split it hasn't been adjusted for yet.
+// `adjustedSplits` is tagged per-transaction (not tracked globally) so a transaction added
+// later, backdated before a split that was already processed, still gets caught next run.
+export function applySplitsToTransactions(transactions, splits) {
+  let changed = false;
+  const next = transactions.map((tx) => {
+    const applied = new Set(tx.adjustedSplits || []);
+    let quantity = tx.quantity;
+    let price = tx.price;
+    let touched = false;
+
+    splits.forEach((s) => {
+      const key = `${s.ticker}|${s.effective_date}`;
+      if (applied.has(key)) return;
+      if (tx.ticker.toUpperCase() !== s.ticker.toUpperCase()) return;
+      if (new Date(tx.date) >= new Date(s.effective_date)) return;
+
+      quantity *= s.ratio;
+      price /= s.ratio;
+      applied.add(key);
+      touched = true;
+    });
+
+    if (!touched) return tx;
+    changed = true;
+    return { ...tx, quantity, price, adjustedSplits: [...applied] };
+  });
+  return changed ? next : transactions;
+}
+
 export function usePortfolio(apiBase, onTrackNewTicker, trackedTickers) {
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem('litefi_portfolio_transactions');
@@ -28,6 +58,25 @@ export function usePortfolio(apiBase, onTrackNewTicker, trackedTickers) {
   useEffect(() => {
     localStorage.setItem('litefi_portfolio_transactions', JSON.stringify(transactions));
   }, [transactions]);
+
+  // Catch up on any stock split -- past or future -- recorded by the backend's corporate
+  // actions ledger. Runs on every load; per-transaction tagging keeps it a no-op once caught up.
+  useEffect(() => {
+    let isMounted = true;
+    (async () => {
+      try {
+        const res = await fetch(`${apiBase}/corporate_actions`);
+        if (!res.ok || !isMounted) return;
+        const { data } = await res.json();
+        const splits = (data || []).filter((a) => a.action_type === 'SPLIT');
+        if (splits.length === 0) return;
+        setTransactions((prev) => applySplitsToTransactions(prev, splits));
+      } catch (err) {
+        console.error('Failed to check corporate actions for splits', err);
+      }
+    })();
+    return () => { isMounted = false; };
+  }, [apiBase]);
 
   // Live Prices State
   const [livePrices, setLivePrices] = useState({});

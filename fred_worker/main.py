@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 QUESTDB_HOST = os.getenv("QUESTDB_HOST", "questdb")
-QUESTDB_ILP_PORT = 9009
+QUESTDB_ILP_PORT = int(os.getenv("QUESTDB_ILP_PORT", 9009))
 FRED_API_KEY = os.getenv("FRED_API_KEY", "05f6f0ba0a0347f8cb544300570ad8de")
 
 MACRO_INDICATORS = {

@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 QUESTDB_HOST = os.getenv("QUESTDB_HOST", "questdb")
-QUESTDB_REST_PORT = 9000
+QUESTDB_REST_PORT = int(os.getenv("QUESTDB_REST_PORT", 9000))
 
 def fetch_questdb_data(query: str):
     url = f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec"

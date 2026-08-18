@@ -18,8 +18,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 QUESTDB_HOST = os.getenv("QUESTDB_HOST", "localhost")
-QUESTDB_ILP_PORT = 9009
-QUESTDB_REST_PORT = 9000
+QUESTDB_ILP_PORT = int(os.getenv("QUESTDB_ILP_PORT", 9009))
+QUESTDB_REST_PORT = int(os.getenv("QUESTDB_REST_PORT", 9000))
 TICKERS_FILE = "tickers.json"
 
 app = FastAPI(
@@ -51,7 +51,17 @@ def init_db_schema():
             volume LONG,
             timestamp TIMESTAMP
         ) TIMESTAMP(timestamp) PARTITION BY DAY WAL DEDUPLICATE UPSERT KEYS (ticker, timestamp);
+        """,
         """
+        CREATE TABLE IF NOT EXISTS corporate_actions (
+            ticker SYMBOL,
+            action_type SYMBOL,
+            effective_date TIMESTAMP,
+            ratio DOUBLE,
+            status SYMBOL,
+            applied_at TIMESTAMP
+        ) TIMESTAMP(applied_at) PARTITION BY MONTH WAL;
+        """,
     ]
     for q in queries:
         max_retries = 15
@@ -93,11 +103,17 @@ def save_tracked_ticker(ticker: str):
 
 
 # --- INGESTION LOGIC ---
+# Distinct from None (= ticker genuinely has no rows yet): a query/connection failure must
+# never be treated as "new ticker", or a transient DB hiccup triggers a full redundant
+# historical backfill instead of just being retried next cycle.
+DB_CHECK_FAILED = object()
+
+
 def get_latest_timestamp_db(ticker: str):
     url = f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec"
     query = f"SELECT max(timestamp) FROM equity_prices WHERE ticker = '{ticker}'"
     try:
-        response = requests.get(url, params={"query": query}, timeout=5)
+        response = requests.get(url, params={"query": query}, timeout=15)
         if response.status_code == 200:
             data = response.json()
             if (
@@ -107,13 +123,17 @@ def get_latest_timestamp_db(ticker: str):
             ):
                 latest_ts = data["dataset"][0][0]
                 return datetime.datetime.fromisoformat(latest_ts[:10]).date()
+            return None  # ticker genuinely has no rows yet
     except Exception as e:
         logger.error(f"Database check failed for {ticker}: {e}")
-    return None  # Return None to indicate a new ticker without any existing data
+    return DB_CHECK_FAILED
 
 
 def execute_historical_backfill(ticker: str):
     start_date = get_latest_timestamp_db(ticker)
+    if start_date is DB_CHECK_FAILED:
+        logger.warning(f"Skipping backfill for {ticker} this cycle -- DB check failed.")
+        return
     today = datetime.date.today()
 
     if start_date:
@@ -336,6 +356,29 @@ def get_financial_data(
     {sample_clause} ALIGN TO CALENDAR LIMIT -{limit};
     """
 
+    try:
+        response = requests.get(
+            f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec", params={"query": query}
+        )
+        db_result = response.json()
+        if "error" in db_result:
+            raise HTTPException(status_code=400, detail=db_result["error"])
+        columns = [col["name"] for col in db_result.get("columns", [])]
+        records = [dict(zip(columns, row)) for row in db_result.get("dataset", [])]
+        return {"data": records}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/corporate_actions")
+def get_corporate_actions(ticker: str = Query(None)):
+    filter_clause = f"WHERE ticker = '{ticker.upper()}'" if ticker else ""
+    query = (
+        "SELECT ticker, action_type, effective_date, ratio, status, applied_at "
+        f"FROM corporate_actions {filter_clause} ORDER BY applied_at DESC"
+    )
     try:
         response = requests.get(
             f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec", params={"query": query}

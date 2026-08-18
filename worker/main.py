@@ -8,12 +8,14 @@ import pandas as pd
 from questdb.ingress import Sender
 from apscheduler.schedulers.background import BlockingScheduler
 
+import corporate_actions
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 QUESTDB_HOST = os.getenv("QUESTDB_HOST", "questdb")
-QUESTDB_ILP_PORT = 9009
-QUESTDB_REST_PORT = 9000
+QUESTDB_ILP_PORT = int(os.getenv("QUESTDB_ILP_PORT", 9009))
+QUESTDB_REST_PORT = int(os.getenv("QUESTDB_REST_PORT", 9000))
 API_HOST = os.getenv("API_HOST", "financial_api:8000")
 
 FX_BONDS_TICKERS = ['EURUSD=X', 'GBPUSD=X', 'JPY=X', 'INR=X', 'CHF=X', '^TNX', '^IRX', '^TYX', '^FVX', '^GSPC', '^VIX', 'TLT', 'HYG', 'LQD']
@@ -30,24 +32,33 @@ def get_api_tickers():
 def get_all_tickers():
     return list(set(get_api_tickers() + FX_BONDS_TICKERS))
 
+# Distinct from None (= ticker genuinely has no rows yet): a query/connection failure must
+# never be treated as "new ticker", or a transient DB hiccup triggers a full redundant
+# historical backfill instead of just being retried next cycle.
+DB_CHECK_FAILED = object()
+
 def get_latest_timestamp_db(ticker: str):
     url = f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec"
     query = f"SELECT max(timestamp) FROM equity_prices WHERE ticker = '{ticker}'"
     try:
-        response = requests.get(url, params={'query': query}, timeout=5)
+        response = requests.get(url, params={'query': query}, timeout=15)
         if response.status_code == 200:
             data = response.json()
             if data.get('dataset') and len(data['dataset']) > 0 and data['dataset'][0][0]:
                 latest_ts = data['dataset'][0][0]
                 return datetime.datetime.fromisoformat(latest_ts[:10]).date()
+            return None  # ticker genuinely has no rows yet
     except Exception as e:
         logger.error(f"Database check failed for {ticker}: {e}")
-    return None
+    return DB_CHECK_FAILED
 
 def execute_historical_backfill(ticker: str):
     start_date = get_latest_timestamp_db(ticker)
+    if start_date is DB_CHECK_FAILED:
+        logger.warning(f"Skipping backfill for {ticker} this cycle -- DB check failed.")
+        return
     today = datetime.date.today()
-    
+
     if start_date:
         if (today - start_date).days <= 1:
             logger.info(f"Ticker {ticker} is up to date historically.")
@@ -160,18 +171,28 @@ def scheduled_daily_backfill():
     for t in tickers:
         execute_historical_backfill(t)
 
+def scheduled_corporate_actions_check():
+    tickers = get_all_tickers()
+    logger.info(f"Checking {len(tickers)} assets for new stock splits.")
+    corporate_actions.check_all(tickers)
+
 if __name__ == "__main__":
     logger.info("Worker starting up...")
-    
+
     # Wait briefly for API/QuestDB to be ready
     time.sleep(5)
-    
+
     # Perform initial daily backfill for all FX and Bonds immediately on start
     scheduled_daily_backfill()
+
+    # Catch any stock splits that occurred, so history stays on a single consistent basis
+    scheduled_corporate_actions_check()
 
     scheduler = BlockingScheduler()
     # Real-time sync every hour
     scheduler.add_job(scheduled_realtime_ingest, 'cron', minute='0')
+    # Check for new stock splits shortly before the daily historical backfill
+    scheduler.add_job(scheduled_corporate_actions_check, 'cron', hour='0', minute='5')
     # Historical backfill once daily at midnight
     scheduler.add_job(scheduled_daily_backfill, 'cron', hour='0', minute='10')
     
