@@ -43,7 +43,7 @@ def init_db_schema():
     queries = [
         """
         CREATE TABLE IF NOT EXISTS equity_prices (
-            ticker SYMBOL,
+            ticker SYMBOL INDEX,
             open DOUBLE,
             high DOUBLE,
             low DOUBLE,
