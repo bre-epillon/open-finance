@@ -9,6 +9,11 @@ import requests
 from datetime import datetime
 import uuid
 
+# The React app bundles these JSON files directly (import parsed_transactions.json,
+# etc.) -- writing them straight into its src/ makes that the single source of truth,
+# instead of a transactions/-local copy that has to be manually synced afterward.
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend", "src")
+
 # Trade Republic's export puts the ISIN in the "symbol" column, but ISINs don't reliably
 # resolve to price data on Yahoo Finance and never match the ticker other apps display.
 # Manual pins for cases where the automatic OpenFIGI lookup below ever needs overriding.
@@ -119,8 +124,16 @@ def parse_transactions(csv_path):
         r for r in rows
         if r["category"] == "TRADING" and r["type"] in ["BUY", "SELL"] and r["asset_class"] == "BOND"
     ]
-    deposit_rows = [r for r in rows if r["category"] == "CASH" and r["type"] == "CUSTOMER_INBOUND"]
+    # Every CASH row that isn't interest/dividend income is a plain balance movement --
+    # inbound transfers, referral/fixed-income bonuses, and debit card spend (negative)
+    # all change how much uninvested cash sits in the account, same as a deposit does.
+    DEPOSIT_TYPES = {
+        "CUSTOMER_INBOUND", "VIBAN_TRANSFER_INBOUND", "MANUAL_CASH_TRANSFER",
+        "BONUS", "STOCKPERK", "CARD_TRANSACTION", "CARD_TRANSACTION_INTERNATIONAL",
+    }
+    deposit_rows = [r for r in rows if r["category"] == "CASH" and r["type"] in DEPOSIT_TYPES]
     interest_rows = [r for r in rows if r["category"] == "CASH" and r["type"] == "INTEREST_PAYMENT"]
+    dividend_rows = [r for r in rows if r["category"] == "CASH" and r["type"] == "DIVIDEND"]
 
     state_bonds.extend(bond_rows)
 
@@ -133,19 +146,20 @@ def parse_transactions(csv_path):
             "description": row["description"],
         })
 
-    # Bond coupons (asset_class == BOND, tied to an ISIN) and Trade Republic's own
-    # interest on idle cash (asset_class empty, no instrument) both come through as
-    # CASH/INTEREST_PAYMENT rows -- only the presence of a symbol tells them apart.
-    for row in interest_rows:
+    # Bond coupons and dividends are tied to an ISIN; Trade Republic's own interest on
+    # idle cash (asset_class empty, no instrument) isn't -- that's how the three are told
+    # apart even though they all land as cash income the same way.
+    for row in interest_rows + dividend_rows:
         is_bond = row["asset_class"] == "BOND"
+        is_dividend = row["type"] == "DIVIDEND"
         amount = float(row["amount"]) if row["amount"] else 0.0
         tax = float(row["tax"]) if row["tax"] else 0.0
         interest_payments.append({
             "id": row["transaction_id"] or str(uuid.uuid4()),
             "date": row["date"],
-            "source": "bond" if is_bond else "cash",
-            "isin": row["symbol"] if is_bond else None,
-            "name": row["name"] if is_bond else None,
+            "source": "dividend" if is_dividend else ("bond" if is_bond else "cash"),
+            "isin": row["symbol"] if (is_bond or is_dividend) else None,
+            "name": row["name"] if (is_bond or is_dividend) else None,
             "amount": amount,
             "tax": tax,
             "net_amount": round(amount + tax, 6),
@@ -181,32 +195,39 @@ def parse_transactions(csv_path):
             "type": row["type"],
         })
 
-    # Save parsed equity/funds transactions
-    with open("parsed_transactions.json", "w") as f:
+    # The frontend bundle is the only consumer of these files, so it's also the only
+    # place they're written -- there used to be a second copy here in transactions/ that
+    # had to be manually kept in sync, which is exactly the kind of drift that caused the
+    # frontend to serve stale data.
+    def out(filename):
+        return os.path.join(OUTPUT_DIR, filename)
+
+    with open(out("parsed_transactions.json"), "w") as f:
         json.dump(transactions, f, indent=2)
 
-    # Save state bonds separately
-    with open("state_bonds.json", "w") as f:
+    with open(out("state_bonds.json"), "w") as f:
         json.dump(state_bonds, f, indent=2)
 
-    # Save cash deposits and interest payments (bond coupons + idle-cash interest)
-    with open("cash_deposits.json", "w") as f:
+    with open(out("cash_deposits.json"), "w") as f:
         json.dump(cash_deposits, f, indent=2)
 
-    with open("interest_payments.json", "w") as f:
+    with open(out("interest_payments.json"), "w") as f:
         json.dump(interest_payments, f, indent=2)
 
-    # Write failed imports
-    with open("failed_imports.txt", "w") as f:
+    with open(out("failed_imports.txt"), "w") as f:
         for imp in failed_imports:
             f.write(imp + "\n")
 
     print(f"Successfully parsed {len(transactions)} transactions.")
     print(f"Saved {len(state_bonds)} state bonds separately.")
-    print(f"Saved {len(cash_deposits)} cash deposits.")
+    print(f"Saved {len(cash_deposits)} cash movements (deposits, transfers, bonuses, card spend).")
     bond_interest = sum(1 for p in interest_payments if p["source"] == "bond")
-    cash_interest = len(interest_payments) - bond_interest
-    print(f"Saved {len(interest_payments)} interest payments ({bond_interest} bond coupons, {cash_interest} cash interest).")
+    dividend_income = sum(1 for p in interest_payments if p["source"] == "dividend")
+    cash_interest = len(interest_payments) - bond_interest - dividend_income
+    print(
+        f"Saved {len(interest_payments)} income payments "
+        f"({bond_interest} bond coupons, {dividend_income} dividends, {cash_interest} cash interest)."
+    )
     if failed_imports:
         print(
             f"Failed to import {len(failed_imports)} tickers. They have been saved to failed_imports.txt:"

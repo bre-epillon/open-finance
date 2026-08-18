@@ -128,10 +128,16 @@ def execute_historical_backfill(ticker: str):
                 logger.error(f"Chunked backfill failed for {ticker}: {e}")
                 break
 
+INTRADAY_TABLE = "equity_prices_intraday"
+INTRADAY_RETENTION_DAYS = 4
+
 def scheduled_realtime_ingest():
     tickers = get_all_tickers()
     if not tickers:
         return
+    # Written to a dedicated short-retention table, not equity_prices -- that table holds
+    # full daily history, and mixing in hourly ticks there made resolution=1h ambiguous
+    # (only ever true for the last ~2 days) and grew it without bound.
     logger.info(f"Running scheduled realtime (1h) ingest for {len(tickers)} assets.")
     try:
         data = yf.download(tickers, period="2d", interval="1h", progress=False)
@@ -148,10 +154,10 @@ def scheduled_realtime_ingest():
                         'Close': data['Close'][ticker],
                         'Volume': data['Volume'][ticker]
                     }).dropna()
-                
+
                 for timestamp, row in ticker_df.iterrows():
                     sender.row(
-                        'equity_prices',
+                        INTRADAY_TABLE,
                         symbols={'ticker': ticker},
                         columns={
                             'open': float(row['Open']), 'high': float(row['High']),
@@ -164,6 +170,23 @@ def scheduled_realtime_ingest():
         logger.info("Realtime ingest complete.")
     except Exception as e:
         logger.error(f"Scheduled realtime ingestion error: {e}")
+
+def scheduled_intraday_cleanup():
+    # QuestDB has no row-level DELETE on WAL tables -- partition drop is the idiomatic
+    # way to expire old data, which is exactly why this table is PARTITION BY DAY despite
+    # equity_prices itself having moved away from DAY partitioning (unbounded retention
+    # there is what caused the partition-count blowup; here retention is intentionally
+    # short, so DAY partitions are the right granularity to drop by).
+    cutoff = (datetime.date.today() - datetime.timedelta(days=INTRADAY_RETENTION_DAYS)).isoformat()
+    query = f"ALTER TABLE {INTRADAY_TABLE} DROP PARTITION WHERE timestamp < '{cutoff}'"
+    try:
+        response = requests.get(f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec", params={'query': query}, timeout=15)
+        if response.status_code == 200:
+            logger.info(f"Dropped {INTRADAY_TABLE} partitions older than {cutoff}.")
+        else:
+            logger.error(f"Intraday cleanup failed: {response.text}")
+    except Exception as e:
+        logger.error(f"Intraday cleanup error: {e}")
 
 def scheduled_daily_backfill():
     tickers = get_all_tickers()
@@ -193,6 +216,8 @@ if __name__ == "__main__":
     scheduler.add_job(scheduled_realtime_ingest, 'cron', minute='0')
     # Check for new stock splits shortly before the daily historical backfill
     scheduler.add_job(scheduled_corporate_actions_check, 'cron', hour='0', minute='5')
+    # Drop expired intraday partitions before the day's backfill runs
+    scheduler.add_job(scheduled_intraday_cleanup, 'cron', hour='0', minute='7')
     # Historical backfill once daily at midnight
     scheduler.add_job(scheduled_daily_backfill, 'cron', hour='0', minute='10')
     

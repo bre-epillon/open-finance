@@ -9,12 +9,20 @@ const TIME_WINDOWS = ['1D', '1W', '1M', 'YTD', '1Y', '5Y', '10Y', 'All'];
 export default function ChartContainer({
   rawData,
   selectedTickers,
-  resolution,
   loading,
-  tickerColors
+  tickerColors,
+  onWindowChange
 }) {
   const [selectedWindow, setSelectedWindow] = useState('1Y');
   const [customRangeTs, setCustomRangeTs] = useState([0, Date.now()]);
+
+  // Each window implies its own /api/data resolution (see utils/resolution.js) -- the
+  // slider's freeform 'Custom' range doesn't, since it's just visually slicing whatever
+  // was already fetched for the last preset window.
+  const handleSelectWindow = (win) => {
+    setSelectedWindow(win);
+    if (win !== 'Custom') onWindowChange?.(win);
+  };
 
   // 1. Process all available timestamps from rawData
   const allTimestamps = useMemo(() => {
@@ -73,14 +81,9 @@ export default function ChartContainer({
   const chartData = useMemo(() => {
     if (visibleTimestamps.length === 0) return null;
 
-    const labels = visibleTimestamps.map((ts) => {
-      const date = new Date(ts);
-      if (resolution === '1h') {
-        return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) + ' ' +
-          date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: false });
-      }
-      return date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
-    });
+    const labels = visibleTimestamps.map((ts) =>
+      new Date(ts).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+    );
 
     const datasets = selectedTickers.map((ticker) => {
       const color = tickerColors[ticker] || '#10b981';
@@ -120,7 +123,7 @@ export default function ChartContainer({
     });
 
     return { labels, datasets };
-  }, [rawData, selectedTickers, resolution, tickerColors, visibleTimestamps]);
+  }, [rawData, selectedTickers, tickerColors, visibleTimestamps]);
 
   // Chart Options
   const chartOptions = useMemo(() => ({
@@ -244,7 +247,7 @@ export default function ChartContainer({
               <button 
                 key={win}
                 className={`time-btn ${selectedWindow === win ? 'active' : ''}`}
-                onClick={() => setSelectedWindow(win)}
+                onClick={() => handleSelectWindow(win)}
               >
                 {win}
               </button>

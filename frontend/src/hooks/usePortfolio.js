@@ -62,26 +62,22 @@ export function applySplitsToTransactions(transactions, splits) {
 }
 
 export function usePortfolio(apiBase, onTrackNewTicker, trackedTickers) {
+  // The bundled JSON (parsed_transactions.json) is the single source of truth for
+  // imported transactions -- it always wins on load, so re-running parse_csv.py against
+  // a fresh CSV export is guaranteed to show up, instead of a stale localStorage cache
+  // silently shadowing it forever. Only entries with an id the bundle doesn't know about
+  // (added manually via the form) are kept from localStorage.
   const [transactions, setTransactions] = useState(() => {
+    const bundled = reconcileTickers(initialTransactions || []);
     const saved = localStorage.getItem('litefi_portfolio_transactions');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.length > 0) {
-        // Map names from initial JSON to fix previously cached transactions missing the name
-        const nameMap = {};
-        (initialTransactions || []).forEach(t => {
-          if (t.name && t.name !== t.ticker) {
-            nameMap[t.ticker.toUpperCase()] = t.name;
-          }
-        });
-        
-        return reconcileTickers(parsed.map(tx => ({
-          ...tx,
-          name: tx.name && tx.name !== tx.ticker ? tx.name : (nameMap[tx.ticker.toUpperCase()] || tx.ticker)
-        })));
-      }
+    if (!saved) return bundled;
+    try {
+      const bundledIds = new Set(bundled.map((tx) => tx.id));
+      const manualOnly = JSON.parse(saved).filter((tx) => !bundledIds.has(tx.id));
+      return reconcileTickers([...bundled, ...manualOnly]);
+    } catch {
+      return bundled;
     }
-    return reconcileTickers(initialTransactions || []);
   });
 
   // Persist transactions

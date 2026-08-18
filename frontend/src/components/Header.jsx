@@ -7,8 +7,6 @@ import './Header.css';
  * Displays the main title, subtitle, connection status, and resolution/refresh controls.
  */
 export default function Header({
-  resolution,
-  setResolution,
   onRefresh,
   loading,
   isApiConnected
@@ -34,16 +32,6 @@ export default function Header({
         </div>
 
         <div className="control-group">
-          <select
-            value={resolution}
-            onChange={(e) => setResolution(e.target.value)}
-            className="resolution-select"
-            disabled={loading}
-          >
-            <option value="1d">Daily (1d)</option>
-            <option value="1h">Hourly (1h)</option>
-          </select>
-
           <button
             onClick={onRefresh}
             className={`refresh-btn ${loading ? 'loading' : ''}`}

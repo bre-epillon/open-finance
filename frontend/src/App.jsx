@@ -9,6 +9,7 @@ import StatsGrid from './components/StatsGrid.jsx';
 import PortfolioManager from './components/PortfolioManager.jsx';
 import FearAndGreed from './components/FearAndGreed.jsx';
 import Home from './components/Home.jsx';
+import { WINDOW_RESOLUTION } from './utils/resolution.js';
 
 const API_BASE = `http://${window.location.hostname}:8000/api`;
 
@@ -34,24 +35,6 @@ export default function App() {
   const [isApiConnected, setIsApiConnected] = useState(false);
   const cachedTickers = useRef(new Set());
   const cachedResolution = useRef('1d');
-
-  // Read current portfolio symbols to ensure we always load their telemetry prices
-  const portfolioSymbols = useMemo(() => {
-    const saved = localStorage.getItem('litefi_portfolio_transactions');
-    if (!saved) return [];
-    try {
-      const txs = JSON.parse(saved);
-      return Array.from(new Set(txs.map(tx => tx.ticker.toUpperCase())));
-    } catch {
-      return [];
-    }
-  }, [location.pathname]); // Update when navigating to portfolio
-
-  // Combined list of tickers that we need to fetch data for
-  const tickersToFetch = useMemo(() => {
-    const combined = new Set([...selectedTickers, ...portfolioSymbols]);
-    return Array.from(combined);
-  }, [selectedTickers, portfolioSymbols]);
 
   // Dynamically assign colors to tickers from preset palette
   const tickerColors = useMemo(() => {
@@ -93,19 +76,23 @@ export default function App() {
     }
   }, [selectedTickers]);
 
-  // Fetch telemetry historical price data for active + portfolio assets
+  // Fetch telemetry historical price data for the Terminal's selected tickers, at the
+  // resolution implied by the selected time window (see handleWindowChange below).
+  // Portfolio Manager fetches its own price history independently -- it needs a
+  // resolution matching the portfolio's full lifetime span, not whatever window the
+  // Terminal chart happens to have selected.
   const fetchTelemetryData = useCallback(async (forceRefresh = false) => {
-    if (tickersToFetch.length === 0) {
+    if (selectedTickers.length === 0) {
       setRawData([]);
       cachedTickers.current.clear();
       return;
     }
 
     const isForced = forceRefresh === true;
-    let uncachedTickers = tickersToFetch;
-    
+    let uncachedTickers = selectedTickers;
+
     if (!isForced && resolution === cachedResolution.current) {
-      uncachedTickers = tickersToFetch.filter(t => !cachedTickers.current.has(t));
+      uncachedTickers = selectedTickers.filter(t => !cachedTickers.current.has(t));
       if (uncachedTickers.length === 0) return;
     } else {
       cachedTickers.current.clear();
@@ -131,7 +118,12 @@ export default function App() {
     } finally {
       setDataLoading(false);
     }
-  }, [tickersToFetch, resolution]);
+  }, [selectedTickers, resolution]);
+
+  // Each Terminal time-window implies its own resolution -- see utils/resolution.js.
+  const handleWindowChange = useCallback((window) => {
+    setResolution(WINDOW_RESOLUTION[window] || '1d');
+  }, []);
 
   // Handle ticker list selections
   const handleToggleTicker = useCallback((ticker) => {
@@ -153,10 +145,10 @@ export default function App() {
     fetchTickers();
   }, []);
 
-  // Sync historical chart data when selected nodes, portfolio, or resolution changes
+  // Sync historical chart data when selected nodes or resolution changes
   useEffect(() => {
     fetchTelemetryData();
-  }, [selectedTickers, portfolioSymbols, resolution, fetchTelemetryData]);
+  }, [selectedTickers, resolution, fetchTelemetryData]);
 
   // Light background polling to update terminal data every 5 minutes
   useEffect(() => {
@@ -171,8 +163,6 @@ export default function App() {
     <div className="app-container">
       {location.pathname !== '/' && (
         <Header
-          resolution={resolution}
-          setResolution={setResolution}
           onRefresh={fetchTelemetryData}
           loading={dataLoading}
           isApiConnected={isApiConnected}
@@ -228,9 +218,9 @@ export default function App() {
               <ChartContainer
                 rawData={rawData.filter(d => selectedTickers.includes(d.ticker))}
                 selectedTickers={selectedTickers}
-                resolution={resolution}
                 loading={dataLoading}
                 tickerColors={tickerColors}
+                onWindowChange={handleWindowChange}
               />
               
               <StatsGrid
@@ -245,7 +235,6 @@ export default function App() {
         <Route path="/portfolio" element={
           <PortfolioManager
             trackedTickers={tickers}
-            telemetryData={rawData}
             apiBase={API_BASE}
             onTrackNewTicker={handleTrackSuccess}
           />

@@ -50,7 +50,7 @@ def init_db_schema():
             close DOUBLE,
             volume LONG,
             timestamp TIMESTAMP
-        ) TIMESTAMP(timestamp) PARTITION BY DAY WAL DEDUPLICATE UPSERT KEYS (ticker, timestamp);
+        ) TIMESTAMP(timestamp) PARTITION BY MONTH WAL DEDUPLICATE UPSERT KEYS (ticker, timestamp);
         """,
         """
         CREATE TABLE IF NOT EXISTS corporate_actions (
@@ -61,6 +61,22 @@ def init_db_schema():
             status SYMBOL,
             applied_at TIMESTAMP
         ) TIMESTAMP(applied_at) PARTITION BY MONTH WAL;
+        """,
+        # Short-retention home for the worker's hourly "current price" ticks -- kept
+        # separate from equity_prices so intraday rows never mix with full daily history
+        # (that mixing is what made resolution=1h ambiguous beyond the last couple of
+        # days) and so DAY partitioning here is actually appropriate, since old partitions
+        # get dropped continuously instead of accumulating for decades.
+        """
+        CREATE TABLE IF NOT EXISTS equity_prices_intraday (
+            ticker SYMBOL INDEX,
+            open DOUBLE,
+            high DOUBLE,
+            low DOUBLE,
+            close DOUBLE,
+            volume LONG,
+            timestamp TIMESTAMP
+        ) TIMESTAMP(timestamp) PARTITION BY DAY WAL DEDUPLICATE UPSERT KEYS (ticker, timestamp);
         """,
     ]
     for q in queries:
@@ -326,34 +342,30 @@ def get_financial_data(
     # Accepts comma separated tickers e.g., ?tickers=AAPL,SPY
     ticker_list = [t.strip().upper() for t in tickers.split(",")]
 
-    # Auto-track and backfill requested tickers not in DB
+    # Auto-track and backfill requested tickers not in DB. This is a multi-ticker overlay
+    # query, so it must not validate each ticker synchronously against yfinance here --
+    # with a dozen+ never-seen tickers (e.g. a freshly imported portfolio) that serialized
+    # network round-trip blew past this endpoint's own timeout before ever reaching
+    # QuestDB. execute_historical_backfill already no-ops for an invalid ticker (empty
+    # yf.download result), so tracking is safe to do unconditionally in the background.
     tracked = load_tracked_tickers()
     for t in ticker_list:
         if t not in tracked:
-            try:
-                # Basic validation that it's a real ticker
-                if yf.Ticker(t).history(period="1d").empty:
-                    raise HTTPException(
-                        status_code=404, detail=f"Ticker {t} not found on yfinance."
-                    )
-                save_tracked_ticker(t)
-                background_tasks.add_task(execute_historical_backfill, t)
-            except HTTPException:
-                raise
-            except Exception as e:
-                logger.error(f"Failed to auto-track {t}: {e}")
-                raise HTTPException(
-                    status_code=404, detail=f"Ticker {t} not found or invalid."
-                )
+            save_tracked_ticker(t)
+            background_tasks.add_task(execute_historical_backfill, t)
 
     ticker_filter = ",".join([f"'{t}'" for t in ticker_list])
 
-    sample_clause = "SAMPLE BY 1d" if resolution == "1d" else "SAMPLE BY 1h"
+    # Resolution picks the SAMPLE BY bucket: the caller (chart) knows its own zoom level
+    # and asks for bars sized to it, same as TradingView/Polygon-style bar APIs -- this
+    # endpoint just aggregates real OHLC bars at that size rather than the caller having
+    # to fetch everything and thin it out client-side.
+    sample_unit = {"1d": "1d", "1w": "1w", "1M": "1M"}.get(resolution, "1d")
     query = f"""
     SELECT timestamp, ticker, last(close) as close
-    FROM equity_prices 
-    WHERE ticker IN ({ticker_filter}) 
-    {sample_clause} ALIGN TO CALENDAR LIMIT -{limit};
+    FROM equity_prices
+    WHERE ticker IN ({ticker_filter})
+    SAMPLE BY {sample_unit} ALIGN TO CALENDAR LIMIT -{limit};
     """
 
     try:

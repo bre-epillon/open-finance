@@ -1,0 +1,604 @@
+[
+  {
+    "id": "d94299b1-4b4c-44c1-9024-ffd2bfa16208",
+    "date": "2025-01-02",
+    "amount": 10000.0,
+    "currency": "EUR",
+    "description": "Account opening TR"
+  },
+  {
+    "id": "78950561-10a5-43dd-9af0-d7e40f8368c5",
+    "date": "2025-01-07",
+    "amount": 9.5,
+    "currency": "EUR",
+    "description": "Stockperk"
+  },
+  {
+    "id": "56251ed4-6a95-47a1-94f0-0d33703947e9",
+    "date": "2025-02-01",
+    "amount": 19.83,
+    "currency": "EUR",
+    "description": "Interest payment Booking"
+  },
+  {
+    "id": "6d1e333a-06a2-4048-a925-d87f16e64710",
+    "date": "2025-02-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "9304ec8f-4c78-46e2-9ad3-4e8a9f72afa4",
+    "date": "2025-03-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "c973fc58-8f1a-4545-b5d4-6896ac2934c8",
+    "date": "2025-04-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "11e36715-867b-4026-a56f-b8d8a536bb7d",
+    "date": "2025-04-11",
+    "amount": 300.0,
+    "currency": "EUR",
+    "description": "Bonus"
+  },
+  {
+    "id": "e574e3ab-4172-4b15-987d-a8a17a2aaf9c",
+    "date": "2025-04-15",
+    "amount": 3500.0,
+    "currency": "EUR",
+    "description": "Saving account"
+  },
+  {
+    "id": "704866c4-934e-498b-91da-3d24d974fd19",
+    "date": "2025-04-22",
+    "amount": 420.0,
+    "currency": "EUR",
+    "description": "Taxes retribution"
+  },
+  {
+    "id": "b5527ad7-da35-4224-9c19-9f3668bb9d16",
+    "date": "2025-05-05",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "e1fcf276-29d3-4280-9ea8-80eb45def1ba",
+    "date": "2025-06-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "9e78999d-b13f-4726-be02-02f9ef4402a1",
+    "date": "2025-07-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "67b7c80c-c331-46d3-bb30-6cbe4bc98711",
+    "date": "2025-07-17",
+    "amount": -19.18,
+    "currency": "EUR",
+    "description": "TR Card Transaction"
+  },
+  {
+    "id": "fa838fc2-89b7-4327-836b-c0ecd96dd7b4",
+    "date": "2025-07-31",
+    "amount": 2000.0,
+    "currency": "EUR",
+    "description": "Investment"
+  },
+  {
+    "id": "a87639a7-f69f-4b87-9c68-48b7d1fff4dc",
+    "date": "2025-08-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "75c38fba-f416-4a9a-9fca-04664f5eb2e4",
+    "date": "2025-08-05",
+    "amount": -18.8,
+    "currency": "EUR",
+    "description": "CASUALFOOD  2675"
+  },
+  {
+    "id": "59cb3742-ed05-4046-a454-fbc792ea3102",
+    "date": "2025-08-07",
+    "amount": -34.32,
+    "currency": "EUR",
+    "description": "SEVEN-ELEVEN, 5.846\u00a0\u00a5, exchange rate: 0,0058707, ECB rate: 0,0058275058, markup: 0,74121248\u00a0%"
+  },
+  {
+    "id": "87280e02-74e6-4f42-8f9f-d4bc3f31c9ce",
+    "date": "2025-08-07",
+    "amount": -25.24,
+    "currency": "EUR",
+    "description": "SHIBUYA PARCO, 4.290\u00a0\u00a5, exchange rate: 0,0058834, ECB rate: 0,0058275058, markup: 0,95914448\u00a0%"
+  },
+  {
+    "id": "2e88eb85-6707-443b-b96c-5e398bf1415a",
+    "date": "2025-08-09",
+    "amount": -3.17,
+    "currency": "EUR",
+    "description": "FAMILYMART, 539\u00a0\u00a5, exchange rate: 0,0058813, ECB rate: 0,0058078755, markup: 1,26422304\u00a0%"
+  },
+  {
+    "id": "a945fd01-c349-4562-860d-a35c8e96db45",
+    "date": "2025-08-09",
+    "amount": -1.75,
+    "currency": "EUR",
+    "description": "LAWSON, 299\u00a0\u00a5, exchange rate: 0,0058528, ECB rate: 0,0058078755, markup: 0,77351004\u00a0%"
+  },
+  {
+    "id": "ab613cc2-bc05-41a9-a7b0-61b99e87206b",
+    "date": "2025-08-09",
+    "amount": -2.71,
+    "currency": "EUR",
+    "description": "LAWSON, 462\u00a0\u00a5, exchange rate: 0,0058658, ECB rate: 0,0058078755, markup: 0,99734404\u00a0%"
+  },
+  {
+    "id": "d4868ae8-5251-4dff-9137-2b7a7332b1d3",
+    "date": "2025-08-09",
+    "amount": -8.02,
+    "currency": "EUR",
+    "description": "SANDORATSUGU, 1.362\u00a0\u00a5, exchange rate: 0,0058884, ECB rate: 0,0058078755, markup: 1,38647084\u00a0%"
+  },
+  {
+    "id": "f2e12847-9cc9-4a94-91c7-a846f7dabc06",
+    "date": "2025-08-10",
+    "amount": -5.29,
+    "currency": "EUR",
+    "description": "ONODEN, 907\u00a0\u00a5, exchange rate: 0,0058324, ECB rate: 0,0058078755, markup: 0,42226284\u00a0%"
+  },
+  {
+    "id": "0413efb1-065b-4632-821e-9fda534c276a",
+    "date": "2025-08-11",
+    "amount": -5.25,
+    "currency": "EUR",
+    "description": "FUMICHAN KIIRO, 900\u00a0\u00a5, exchange rate: 0,0058333, ECB rate: 0,0058078755, markup: 0,43775904\u00a0%"
+  },
+  {
+    "id": "4fba9aaf-50af-4b8b-89b8-30feb230d7a3",
+    "date": "2025-08-11",
+    "amount": -3.14,
+    "currency": "EUR",
+    "description": "FAMILYMART, 538\u00a0\u00a5, exchange rate: 0,0058364, ECB rate: 0,0058078755, markup: 0,49113484\u00a0%"
+  },
+  {
+    "id": "518c8c1f-d7c3-40dc-9703-26e41af915a6",
+    "date": "2025-08-11",
+    "amount": -3.5,
+    "currency": "EUR",
+    "description": "AZABUSABO HOTSUKAIDOAIS, 600\u00a0\u00a5, exchange rate: 0,0058333, ECB rate: 0,0058078755, markup: 0,43775904\u00a0%"
+  },
+  {
+    "id": "9e1db1d0-0293-44c1-96cb-1fc07964cef7",
+    "date": "2025-08-11",
+    "amount": -22.18,
+    "currency": "EUR",
+    "description": "EDION, 3.800\u00a0\u00a5, exchange rate: 0,0058368, ECB rate: 0,0058078755, markup: 0,49802204\u00a0%"
+  },
+  {
+    "id": "64d5929e-d10e-462d-9d2d-779408e1ac4c",
+    "date": "2025-08-11",
+    "amount": -11.67,
+    "currency": "EUR",
+    "description": "TOKYOKOKURITSUHAKUBUTSUKA, 2.000\u00a0\u00a5, exchange rate: 0,005835, ECB rate: 0,0058078755, markup: 0,46702964\u00a0%"
+  },
+  {
+    "id": "d355c9cf-fcf1-4240-b31e-d11b929a6a1f",
+    "date": "2025-08-11",
+    "amount": -8.47,
+    "currency": "EUR",
+    "description": "MIRAIDAINING ASAKUSA RICH, 1.450\u00a0\u00a5, exchange rate: 0,0058414, ECB rate: 0,0058078755, markup: 0,57722484\u00a0%"
+  },
+  {
+    "id": "b0dc2b3f-3e61-4d80-858f-456cf9fe0c23",
+    "date": "2025-08-12",
+    "amount": -12.57,
+    "currency": "EUR",
+    "description": "LAWSON, 2.152\u00a0\u00a5, exchange rate: 0,0058411, ECB rate: 0,0058038305, markup: 0,64215349\u00a0%"
+  },
+  {
+    "id": "2b2a8663-4794-4328-9283-28167bf9f333",
+    "date": "2025-08-13",
+    "amount": -11.39,
+    "currency": "EUR",
+    "description": "EGG BABY CAFE, 1.950\u00a0\u00a5, exchange rate: 0,005841, ECB rate: 0,0057981098, markup: 0,73972728\u00a0%"
+  },
+  {
+    "id": "367d28b7-138e-4236-bee9-027fa752ed12",
+    "date": "2025-08-13",
+    "amount": -1.92,
+    "currency": "EUR",
+    "description": "LAWSON, 329\u00a0\u00a5, exchange rate: 0,0058359, ECB rate: 0,0057981098, markup: 0,65176758\u00a0%"
+  },
+  {
+    "id": "60733f92-6b85-4eb4-98dc-78633c8f9b67",
+    "date": "2025-08-13",
+    "amount": -35.04,
+    "currency": "EUR",
+    "description": "FUJI MOTORSPORTS MUSEUM, 6.000\u00a0\u00a5, exchange rate: 0,00584, ECB rate: 0,0057981098, markup: 0,72248028\u00a0%"
+  },
+  {
+    "id": "eebc31c3-9386-4421-8551-fb82f1164c2c",
+    "date": "2025-08-13",
+    "amount": -2.07,
+    "currency": "EUR",
+    "description": "FAMILYMART, 355\u00a0\u00a5, exchange rate: 0,005831, ECB rate: 0,0057981098, markup: 0,56725728\u00a0%"
+  },
+  {
+    "id": "06115e0d-3091-49e1-9e38-a99b9cbbcf65",
+    "date": "2025-08-14",
+    "amount": -4.12,
+    "currency": "EUR",
+    "description": "LAWSON, 707\u00a0\u00a5, exchange rate: 0,0058274, ECB rate: 0,0058377116, markup: -0,17663771\u00a0%"
+  },
+  {
+    "id": "ac5fe712-9c6b-4bc7-868e-a562f5a5f25e",
+    "date": "2025-08-14",
+    "amount": -7.87,
+    "currency": "EUR",
+    "description": "BRANDNEWDAYKAWAGUCHIKOOOI, 1.350\u00a0\u00a5, exchange rate: 0,0058296, ECB rate: 0,0058377116, markup: -0,13895171\u00a0%"
+  },
+  {
+    "id": "b3bb6138-baf5-4e33-8aa3-26b9de943c56",
+    "date": "2025-08-15",
+    "amount": -8.22,
+    "currency": "EUR",
+    "description": "MCDONALD'S, 1.410\u00a0\u00a5, exchange rate: 0,0058298, ECB rate: 0,005820383, markup: 0,16179348\u00a0%"
+  },
+  {
+    "id": "7c6b90eb-590a-4fba-92e4-67d70879f826",
+    "date": "2025-08-15",
+    "amount": -1.07,
+    "currency": "EUR",
+    "description": "LAWSON, 184\u00a0\u00a5, exchange rate: 0,0058152, ECB rate: 0,005820383, markup: -0,08904912\u00a0%"
+  },
+  {
+    "id": "5b38d205-70d4-4f94-8e44-f9bcb1760991",
+    "date": "2025-08-16",
+    "amount": -1.91,
+    "currency": "EUR",
+    "description": "FAMILYMART, 327\u00a0\u00a5, exchange rate: 0,005841, ECB rate: 0,005820383, markup: 0,35422068\u00a0%"
+  },
+  {
+    "id": "bb67fcbf-be5f-4a50-bbb0-411db708dc10",
+    "date": "2025-08-16",
+    "amount": -1.82,
+    "currency": "EUR",
+    "description": "FAMILYMART, 312\u00a0\u00a5, exchange rate: 0,0058333, ECB rate: 0,005820383, markup: 0,22192698\u00a0%"
+  },
+  {
+    "id": "8595aaf6-4eeb-45af-8d52-4af3b641b4b7",
+    "date": "2025-08-16",
+    "amount": -11.37,
+    "currency": "EUR",
+    "description": "KUSHIKATSU OJI JANJAN, 1.958\u00a0\u00a5, exchange rate: 0,0058069, ECB rate: 0,005820383, markup: -0,23165142\u00a0%"
+  },
+  {
+    "id": "1cd3423f-503b-44a2-a9cd-63a5ff952d4f",
+    "date": "2025-08-16",
+    "amount": -2.92,
+    "currency": "EUR",
+    "description": "FAMILYMART, 501\u00a0\u00a5, exchange rate: 0,0058283, ECB rate: 0,005820383, markup: 0,13602198\u00a0%"
+  },
+  {
+    "id": "e6cbc628-4c46-45ab-b682-95c8bfe3efb9",
+    "date": "2025-08-17",
+    "amount": -10.53,
+    "currency": "EUR",
+    "description": "OSAKAMUSEUMOFHISTORY, 1.800\u00a0\u00a5, exchange rate: 0,00585, ECB rate: 0,005820383, markup: 0,50884968\u00a0%"
+  },
+  {
+    "id": "320481b3-0ba9-4270-a733-c05e70d5d69a",
+    "date": "2025-08-17",
+    "amount": -15.67,
+    "currency": "EUR",
+    "description": "SUGI PHARMACY, 2.700\u00a0\u00a5, exchange rate: 0,0058037, ECB rate: 0,005820383, markup: -0,28663062\u00a0%"
+  },
+  {
+    "id": "067b12e3-859c-4781-a694-16a7fcd3a2ea",
+    "date": "2025-08-18",
+    "amount": -2.71,
+    "currency": "EUR",
+    "description": "LAWSON, 463\u00a0\u00a5, exchange rate: 0,0058531, ECB rate: 0,005820383, markup: 0,56211078\u00a0%"
+  },
+  {
+    "id": "0c3a1cf4-4fe9-4818-bc7b-6a94ccaf22fc",
+    "date": "2025-08-18",
+    "amount": -7.6,
+    "currency": "EUR",
+    "description": "LAWSON, 1.304\u00a0\u00a5, exchange rate: 0,0058282, ECB rate: 0,005820383, markup: 0,13430388\u00a0%"
+  },
+  {
+    "id": "4ea0e46a-48f0-4ab7-b060-226f0ab58351",
+    "date": "2025-08-18",
+    "amount": -0.7,
+    "currency": "EUR",
+    "description": "POPLAR GROUP, 120\u00a0\u00a5, exchange rate: 0,0058333, ECB rate: 0,005820383, markup: 0,22192698\u00a0%"
+  },
+  {
+    "id": "4fd98968-afea-4901-8878-de2cf18d46c0",
+    "date": "2025-08-18",
+    "amount": -0.95,
+    "currency": "EUR",
+    "description": "LAWSON, 162\u00a0\u00a5, exchange rate: 0,0058642, ECB rate: 0,005820383, markup: 0,75281987\u00a0%"
+  },
+  {
+    "id": "60dfc37e-9d0a-49a9-b4d6-3530c3475453",
+    "date": "2025-08-18",
+    "amount": -3.71,
+    "currency": "EUR",
+    "description": "POPLAR GROUP, 635\u00a0\u00a5, exchange rate: 0,0058425, ECB rate: 0,005820383, markup: 0,37999218\u00a0%"
+  },
+  {
+    "id": "643ef338-6b83-49f0-ac37-59f96eb8b813",
+    "date": "2025-08-18",
+    "amount": -3.52,
+    "currency": "EUR",
+    "description": "LAWSON, 602\u00a0\u00a5, exchange rate: 0,0058472, ECB rate: 0,005820383, markup: 0,46074288\u00a0%"
+  },
+  {
+    "id": "dc07d9ba-d9a0-459f-b0c0-55d96c94599c",
+    "date": "2025-08-18",
+    "amount": -1.97,
+    "currency": "EUR",
+    "description": "FAMILYMART, 339\u00a0\u00a5, exchange rate: 0,0058112, ECB rate: 0,005820383, markup: -0,15777312\u00a0%"
+  },
+  {
+    "id": "f70f6b14-f4fb-49da-b0c2-56b2ab754304",
+    "date": "2025-08-18",
+    "amount": -1.07,
+    "currency": "EUR",
+    "description": "LAWSON, 184\u00a0\u00a5, exchange rate: 0,0058152, ECB rate: 0,005820383, markup: -0,08904912\u00a0%"
+  },
+  {
+    "id": "6646e17b-9018-4736-8106-8a8b07731993",
+    "date": "2025-08-18",
+    "amount": -7.02,
+    "currency": "EUR",
+    "description": "OSAKA SCIENCE MUSEUM, 1.200\u00a0\u00a5, exchange rate: 0,00585, ECB rate: 0,005820383, markup: 0,50884968\u00a0%"
+  },
+  {
+    "id": "026fc484-80d4-46f8-ba1b-09ca858207b3",
+    "date": "2025-08-18",
+    "amount": -5.72,
+    "currency": "EUR",
+    "description": "NAMBA MARUI, 978\u00a0\u00a5, exchange rate: 0,0058487, ECB rate: 0,005820383, markup: 0,48651438\u00a0%"
+  },
+  {
+    "id": "a308d1f5-0bde-4525-aa0e-6b26dde90f0e",
+    "date": "2025-08-18",
+    "amount": -1.8,
+    "currency": "EUR",
+    "description": "LAWSON, 308\u00a0\u00a5, exchange rate: 0,0058442, ECB rate: 0,005820383, markup: 0,40919988\u00a0%"
+  },
+  {
+    "id": "1e1dfd00-5d3e-4248-8ae1-de70cfe44c1c",
+    "date": "2025-08-19",
+    "amount": -2.68,
+    "currency": "EUR",
+    "description": "LAWSON, 460\u00a0\u00a5, exchange rate: 0,0058261, ECB rate: 0,005791394, markup: 0,5992685\u00a0%"
+  },
+  {
+    "id": "6b4beb6c-ba90-466c-bb0a-cbfa7ee7dbb5",
+    "date": "2025-08-19",
+    "amount": -1.84,
+    "currency": "EUR",
+    "description": "LAWSON, 316\u00a0\u00a5, exchange rate: 0,0058228, ECB rate: 0,005791394, markup: 0,5422874\u00a0%"
+  },
+  {
+    "id": "02124097-75d7-49f3-8f85-a41d6edf7abb",
+    "date": "2025-08-20",
+    "amount": -3.79,
+    "currency": "EUR",
+    "description": "TAP TO RIDE JAPAN W, 650\u00a0\u00a5, exchange rate: 0,0058308, ECB rate: 0,0058217384, markup: 0,1556511\u00a0%"
+  },
+  {
+    "id": "079f2cb5-ba45-4acd-81c0-fcd7e9b8c673",
+    "date": "2025-08-20",
+    "amount": -12.83,
+    "currency": "EUR",
+    "description": "KOKOMOYOTSUTEEYA/NFC, 2.200\u00a0\u00a5, exchange rate: 0,0058318, ECB rate: 0,0058217384, markup: 0,1728281\u00a0%"
+  },
+  {
+    "id": "2e507ddf-f08b-4692-80a1-511fc01ff50f",
+    "date": "2025-08-20",
+    "amount": -9.91,
+    "currency": "EUR",
+    "description": "RAYCAFE, 1.700\u00a0\u00a5, exchange rate: 0,0058294, ECB rate: 0,0058217384, markup: 0,1316033\u00a0%"
+  },
+  {
+    "id": "5cccf34c-ea40-4c0e-8f6a-1907e8acd456",
+    "date": "2025-08-20",
+    "amount": -11.66,
+    "currency": "EUR",
+    "description": "TONARINOTONARI, 2.000\u00a0\u00a5, exchange rate: 0,00583, ECB rate: 0,0058217384, markup: 0,1419095\u00a0%"
+  },
+  {
+    "id": "e5eeebb9-528e-41d0-b02d-768322f3d87e",
+    "date": "2025-08-20",
+    "amount": -2.38,
+    "currency": "EUR",
+    "description": "LAWSON, 409\u00a0\u00a5, exchange rate: 0,0058191, ECB rate: 0,0058217384, markup: -0,0453198\u00a0%"
+  },
+  {
+    "id": "f584e9a4-07b2-4e97-8967-a80ca46df2f2",
+    "date": "2025-08-20",
+    "amount": -2.77,
+    "currency": "EUR",
+    "description": "LAWSON, 475\u00a0\u00a5, exchange rate: 0,0058316, ECB rate: 0,0058217384, markup: 0,1693927\u00a0%"
+  },
+  {
+    "id": "cb0fe202-9b6b-4278-b60a-59d4b669f1e4",
+    "date": "2025-08-20",
+    "amount": -8.3,
+    "currency": "EUR",
+    "description": "LAWSON, 1.423\u00a0\u00a5, exchange rate: 0,0058327, ECB rate: 0,0058217384, markup: 0,1882874\u00a0%"
+  },
+  {
+    "id": "b285802a-1eea-44d0-9120-915eafae20d2",
+    "date": "2025-08-20",
+    "amount": -18.57,
+    "currency": "EUR",
+    "description": "KYOTOTSUTAYASHIYOTEN, 3.185\u00a0\u00a5, exchange rate: 0,0058305, ECB rate: 0,0058217384, markup: 0,150498\u00a0%"
+  },
+  {
+    "id": "17c56644-051d-4b13-b747-ea3ba19b55c8",
+    "date": "2025-08-21",
+    "amount": -5.65,
+    "currency": "EUR",
+    "description": "NANKAIGROUP/TRAINS, 970\u00a0\u00a5, exchange rate: 0,0058247, ECB rate: 0,0058217384, markup: 0,0508714\u00a0%"
+  },
+  {
+    "id": "7bd668c1-f39d-4f8a-801b-f9ad10306442",
+    "date": "2025-09-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "4351df26-a161-49ed-9233-1fcbeb01ca79",
+    "date": "2025-10-06",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "83173bb1-db3b-4d86-a0fe-4681443cb096",
+    "date": "2025-10-27",
+    "amount": 1.81,
+    "currency": "EUR",
+    "description": "Fixed income bonus ac4acc96-823a-4913-b7b0-df2453e0fee6 for buy order: ac4acc96-823a-4913-b7b0-df2453e0fee6"
+  },
+  {
+    "id": "e7992a73-631c-4f9b-8779-9f14a4eb1017",
+    "date": "2025-11-03",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Investment"
+  },
+  {
+    "id": "4fd8b0d7-1bca-4774-9b5e-54a25dd9f06d",
+    "date": "2025-11-03",
+    "amount": 0.4,
+    "currency": "EUR",
+    "description": "Fixed income bonus 4d70a614-2c92-4315-885c-df9401200ca7 for buy order: 4d70a614-2c92-4315-885c-df9401200ca7"
+  },
+  {
+    "id": "497619be-e906-4548-8500-1b136f7cebbe",
+    "date": "2025-11-03",
+    "amount": 1000.0,
+    "currency": "EUR",
+    "description": "Investment"
+  },
+  {
+    "id": "e92af46f-2a39-41c3-ae5b-968b50e0f935",
+    "date": "2025-11-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Accumulation plan"
+  },
+  {
+    "id": "019ae928-ac8b-71b1-bb15-89f593e4a409",
+    "date": "2025-12-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019b8dc9-5f8d-783f-8666-1d23d57858a9",
+    "date": "2026-01-05",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019c2837-e210-7bf3-833e-f0d474af4a3e",
+    "date": "2026-02-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019cb86d-9f1b-73bb-bf36-71ffb6b9ec1d",
+    "date": "2026-03-04",
+    "amount": 500.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019d0be7-9837-7675-9516-b0cbf1c94ac8",
+    "date": "2026-03-20",
+    "amount": 300.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019d2647-16cc-7784-a198-831d26532120",
+    "date": "2026-03-25",
+    "amount": -1.81,
+    "currency": "EUR",
+    "description": "(cancellation)  Fixed income bonus 08c9eb32-34b2-4ad9-9ad8-67e38d204c58 for buy order: 753b7a10-0eff-4bc3-b09b-e0f79481b07c"
+  },
+  {
+    "id": "019d6761-b59b-7828-9514-805a1bf3735e",
+    "date": "2026-04-07",
+    "amount": 750.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019db15d-d95c-762e-886e-136115e05178",
+    "date": "2026-04-21",
+    "amount": 200.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK"
+  },
+  {
+    "id": "019df2b1-1c14-7bb7-a8e2-5f0fd2f76174",
+    "date": "2026-05-04",
+    "amount": 750.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK (LU780019545510728000)"
+  },
+  {
+    "id": "019e9202-99eb-728e-94a5-24eca5813e52",
+    "date": "2026-06-04",
+    "amount": 750.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK (LU780019545510728000)"
+  },
+  {
+    "id": "019ecb29-8f01-778e-954c-dc3ea9b6b45a",
+    "date": "2026-06-15",
+    "amount": -0.4,
+    "currency": "EUR",
+    "description": "(cancellation)  Fixed income bonus 37f81e25-1137-4850-a0db-96ddfc138efc for buy order: af0eac5a-ee71-49e4-b053-a3272de86051"
+  },
+  {
+    "id": "019f371a-c44e-75a1-9319-8d68527746c8",
+    "date": "2026-07-06",
+    "amount": 750.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK (LU780019545510728000)"
+  },
+  {
+    "id": "019fcc27-0703-7ea6-8a87-fc8248fd9242",
+    "date": "2026-08-04",
+    "amount": 750.0,
+    "currency": "EUR",
+    "description": "Incoming transfer from PILLON ERIK (LU780019545510728000)"
+  }
+]
