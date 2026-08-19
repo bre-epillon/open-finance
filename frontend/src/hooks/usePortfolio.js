@@ -37,26 +37,33 @@ export function applySplitsToTransactions(transactions, splits) {
   let changed = false;
   const next = transactions.map((tx) => {
     const applied = new Set(tx.adjustedSplits || []);
-    // The backend's corporate_actions ledger can key a split by either the ISIN or the
-    // conventional ticker, depending on which form api/tickers.json happens to track for
-    // that asset -- match against both rather than assuming one, so pruning a duplicate
-    // tracked ticker on the backend can never silently stop split matching here.
+    // The backend's corporate_actions ledger can key the *same* real split under more
+    // than one alias for the same asset (its ISIN and its conventional ticker can each
+    // end up independently re-detected and recorded -- exactly what happened to Nitto
+    // Boseki/NB5.F). Matching against both isin and ticker is correct, but the
+    // "already applied" tracking below must be keyed by the split's effective_date
+    // alone, not by which alias row described it, or the same event gets applied once
+    // per matching alias instead of once per transaction.
     const txIsin = (tx.isin || '').toUpperCase();
     const txTicker = (tx.ticker || '').toUpperCase();
     let quantity = tx.quantity;
     let price = tx.price;
     let touched = false;
 
+    const matchingByDate = new Map();
     splits.forEach((s) => {
-      const key = `${s.ticker}|${s.effective_date}`;
-      if (applied.has(key)) return;
       const splitTicker = s.ticker.toUpperCase();
       if (splitTicker !== txIsin && splitTicker !== txTicker) return;
-      if (new Date(tx.date) >= new Date(s.effective_date)) return;
+      if (!matchingByDate.has(s.effective_date)) matchingByDate.set(s.effective_date, s);
+    });
+
+    matchingByDate.forEach((s, effectiveDate) => {
+      if (applied.has(effectiveDate)) return;
+      if (new Date(tx.date) >= new Date(effectiveDate)) return;
 
       quantity *= s.ratio;
       price /= s.ratio;
-      applied.add(key);
+      applied.add(effectiveDate);
       touched = true;
     });
 
