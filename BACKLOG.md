@@ -1,45 +1,47 @@
 # Backlog
 
 Working notes for the next session, written 2026-08-18 after the portfolio
-performance/chart work. Grouped by priority, not by when it was found. Line
-counts and facts below were verified against the actual repo state, not
-memory — re-check anything before acting on it if much time has passed.
+performance/chart work, updated 2026-08-19 after clearing the "do first"
+items. Grouped by priority, not by when it was found. Line counts and facts
+below were verified against the actual repo state, not memory — re-check
+anything before acting on it if much time has passed.
 
-## Do first
+## Done (2026-08-19)
 
-- **Personal financial data is committed to git.** `transactions/*.json`,
-  `frontend/src/parsed_transactions.json`, `frontend/src/cash_deposits.json`,
-  `frontend/src/interest_payments.json`, `frontend/src/state_bonds.json`, and
-  `api/tickers.json` all contain real transaction amounts, holdings, and
-  dates, and none of them are in `.gitignore`. Fine for a private local repo;
-  a real problem the moment this is pushed anywhere or made public. Decide
-  deliberately: gitignore them (and stop bundling the JSON directly into the
-  frontend build, since that ships the data to the browser bundle too), or
-  accept the tradeoff explicitly. Don't let this get pushed by accident.
-
-- **`execute_historical_backfill` is duplicated between `api/api.py` and
-  `worker/main.py`**, and the copies have already drifted: api.py treats a
-  ticker as "up to date" only if `(today - start_date).days == 0`, worker
-  treats `<= 1` as up to date. Not just a style issue — one skips a
-  legitimate 1-day-stale backfill the other would run. Extract to one shared
-  module (e.g. `worker/backfill.py` imported by both, or a tiny shared
-  package) so there's a single implementation to fix bugs in.
-
-- **`tickers.json` has 24 duplicate entries**: both the raw ISIN and the
-  resolved conventional ticker are tracked for the same asset (e.g.
-  `IE00B5BMR087` *and* `SXR8.DE` for the same fund). Each duplicate doubles
-  the daily backfill work and the blocking startup-loop time for nothing —
-  the ISIN-keyed row never gets real price data anyone reads. Prune the
-  ISIN-form entries once confirmed nothing depends on them.
+- Personal financial data (`transactions/*.json`, `frontend/src/*.json`
+  seed files, both raw Trade Republic CSVs, `tickers.json`/`api/tickers.json`)
+  is now gitignored and untracked (`git rm --cached`) so future commits won't
+  include it. **Important caveat, left for you to act on:** these files were
+  already pushed to `origin/main` on GitHub (`bre-epillon/open-finance`) —
+  untracking only stops *future* commits, it does not remove the data from
+  existing git history or from GitHub. You said you'd check the repo's
+  visibility yourself; if it needs scrubbing from history that's a separate,
+  more invasive `git filter-repo`/force-push job that needs your explicit
+  go-ahead. The untracking changes are staged locally, not committed.
+- `execute_historical_backfill` (+ `get_latest_timestamp_db` + `DB_CHECK_FAILED`)
+  deduplicated into `shared/backfill.py`, imported by both `api/api.py` and
+  `worker/main.py`. The two copies had already drifted (`== 0` vs `<= 1` day
+  staleness threshold) — standardized on `<= 1`, since a same-day gap before
+  markets close isn't a real gap worth a wasted yfinance call. Verified both
+  processes still import and run correctly after the change.
+- Pruned the 24 duplicate ISIN entries from `api/tickers.json` (58 → 34
+  tracked tickers). Before doing this, found and fixed a real dependency it
+  would have broken: `usePortfolio.js`'s `applySplitsToTransactions` matched
+  a split's `ticker` against `tx.isin` *only* when present, so a split
+  recorded by `worker/corporate_actions.py` under the conventional ticker
+  (the only form left tracked now) would never have matched. Fixed to check
+  both `isin` and `ticker`, so split-matching no longer depends on which key
+  form happens to be tracked.
 
 ## Correctness / data integrity
 
 - `api.py`'s `startup_event()` still calls `execute_historical_backfill`
-  synchronously for every tracked ticker (58 today) before Uvicorn accepts
-  requests. Harmless when QuestDB is warm and everything's already backfilled
-  (fast skip-checks), but it's the reason a restart hung for minutes earlier
-  this session when checks were slow. Move it to a background task so the
-  API always comes up immediately regardless of backfill state.
+  synchronously for every tracked ticker (34 today, after pruning duplicates)
+  before Uvicorn accepts requests. Harmless when QuestDB is warm and
+  everything's already backfilled (fast skip-checks), but it's the reason a
+  restart hung for minutes earlier this session when checks were slow. Move
+  it to a background task so the API always comes up immediately regardless
+  of backfill state.
 
 - No test coverage anywhere in the repo, and `portfolioTimeSeries.js` in
   particular is exactly the kind of code that silently produces plausible
@@ -77,23 +79,24 @@ Flagged repeatedly this session, never acted on. Current sizes:
 
 | File | Lines |
 |---|---|
-| `api/api.py` | 450 |
+| `api/api.py` | 290 (was 450 — shrank when the duplicated backfill logic moved to `shared/backfill.py`) |
 | `frontend/src/components/ChartContainer.jsx` | 321 |
 | `frontend/src/utils/portfolioTimeSeries.js` | 259 |
 | `frontend/src/hooks/usePortfolio.js` | 251 |
 | `frontend/src/App.jsx` | 249 |
 | `transactions/parse_csv.py` | 246 |
-| `worker/main.py` | 227 |
 
-`portfolioTimeSeries.js` is one cohesive sweep algorithm — splitting it
-purely to hit a line count would likely hurt readability more than it helps;
-if anything, split by extracting the benchmark/shadow-portfolio logic into
-its own module. `api.py` is the most defensible split: DB schema/ingestion
-vs. HTTP route handlers are already two distinct concerns living in one
-file. `ChartContainer.jsx` likely splits cleanly into the chart itself vs.
-the time-window slider (the mini-preview SVG + dual-range-input block is
-self-contained). Ask before doing a big mechanical split — it touches a lot
-of surface for little functional benefit.
+`worker/main.py` dropped to 139 lines from the same refactor and is no
+longer over the cap. `portfolioTimeSeries.js` is one cohesive sweep
+algorithm — splitting it purely to hit a line count would likely hurt
+readability more than it helps; if anything, split by extracting the
+benchmark/shadow-portfolio logic into its own module. `api.py` is the most
+defensible remaining split: DB schema/ingestion vs. HTTP route handlers are
+already two distinct concerns living in one file. `ChartContainer.jsx`
+likely splits cleanly into the chart itself vs. the time-window slider (the
+mini-preview SVG + dual-range-input block is self-contained). Ask before
+doing a big mechanical split — it touches a lot of surface for little
+functional benefit.
 
 ## Stability / performance
 
