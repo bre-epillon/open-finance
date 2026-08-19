@@ -37,7 +37,12 @@ export function applySplitsToTransactions(transactions, splits) {
   let changed = false;
   const next = transactions.map((tx) => {
     const applied = new Set(tx.adjustedSplits || []);
-    const txKey = (tx.isin || tx.ticker).toUpperCase();
+    // The backend's corporate_actions ledger can key a split by either the ISIN or the
+    // conventional ticker, depending on which form api/tickers.json happens to track for
+    // that asset -- match against both rather than assuming one, so pruning a duplicate
+    // tracked ticker on the backend can never silently stop split matching here.
+    const txIsin = (tx.isin || '').toUpperCase();
+    const txTicker = (tx.ticker || '').toUpperCase();
     let quantity = tx.quantity;
     let price = tx.price;
     let touched = false;
@@ -45,7 +50,8 @@ export function applySplitsToTransactions(transactions, splits) {
     splits.forEach((s) => {
       const key = `${s.ticker}|${s.effective_date}`;
       if (applied.has(key)) return;
-      if (txKey !== s.ticker.toUpperCase()) return;
+      const splitTicker = s.ticker.toUpperCase();
+      if (splitTicker !== txIsin && splitTicker !== txTicker) return;
       if (new Date(tx.date) >= new Date(s.effective_date)) return;
 
       quantity *= s.ratio;

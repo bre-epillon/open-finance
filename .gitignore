@@ -1,3 +1,21 @@
+# Personal financial data -- real transaction/holdings/balance data, both the raw Trade
+# Republic export and everything transactions/parse_csv.py derives from it. Never track
+# this; frontend/src/*.json are seed files the app bundles at build time, generated
+# locally by re-running parse_csv.py, not something that belongs in version control.
+tickers.json
+api/tickers.json
+transactions/*.csv
+transactions/parsed_transactions.json
+transactions/cash_deposits.json
+transactions/interest_payments.json
+transactions/state_bonds.json
+transactions/failed_imports.txt
+frontend/src/parsed_transactions.json
+frontend/src/cash_deposits.json
+frontend/src/interest_payments.json
+frontend/src/state_bonds.json
+frontend/src/failed_imports.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

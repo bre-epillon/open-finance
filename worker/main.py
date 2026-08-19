@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import logging
 import datetime
@@ -9,6 +10,9 @@ from questdb.ingress import Sender
 from apscheduler.schedulers.background import BlockingScheduler
 
 import corporate_actions
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+from shared.backfill import execute_historical_backfill
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -32,101 +36,9 @@ def get_api_tickers():
 def get_all_tickers():
     return list(set(get_api_tickers() + FX_BONDS_TICKERS))
 
-# Distinct from None (= ticker genuinely has no rows yet): a query/connection failure must
-# never be treated as "new ticker", or a transient DB hiccup triggers a full redundant
-# historical backfill instead of just being retried next cycle.
-DB_CHECK_FAILED = object()
-
-def get_latest_timestamp_db(ticker: str):
-    url = f"http://{QUESTDB_HOST}:{QUESTDB_REST_PORT}/exec"
-    query = f"SELECT max(timestamp) FROM equity_prices WHERE ticker = '{ticker}'"
-    try:
-        response = requests.get(url, params={'query': query}, timeout=15)
-        if response.status_code == 200:
-            data = response.json()
-            if data.get('dataset') and len(data['dataset']) > 0 and data['dataset'][0][0]:
-                latest_ts = data['dataset'][0][0]
-                return datetime.datetime.fromisoformat(latest_ts[:10]).date()
-            return None  # ticker genuinely has no rows yet
-    except Exception as e:
-        logger.error(f"Database check failed for {ticker}: {e}")
-    return DB_CHECK_FAILED
-
-def execute_historical_backfill(ticker: str):
-    start_date = get_latest_timestamp_db(ticker)
-    if start_date is DB_CHECK_FAILED:
-        logger.warning(f"Skipping backfill for {ticker} this cycle -- DB check failed.")
-        return
-    today = datetime.date.today()
-
-    if start_date:
-        if (today - start_date).days <= 1:
-            logger.info(f"Ticker {ticker} is up to date historically.")
-            return
-
-        logger.info(f"Backfilling {ticker} from {start_date} to {today}")
-        try:
-            data = yf.download(ticker, start=start_date.strftime("%Y-%m-%d"), end=today.strftime("%Y-%m-%d"), interval="1d", progress=False)
-            if data.empty: return
-
-            with Sender.from_conf(f"tcp::addr={QUESTDB_HOST}:{QUESTDB_ILP_PORT};") as sender:
-                for timestamp, row in data.dropna().iterrows():
-                    sender.row(
-                        'equity_prices',
-                        symbols={'ticker': ticker},
-                        columns={
-                            'open': float(row['Open'].iloc[0] if isinstance(row['Open'], pd.Series) else row['Open']),
-                            'high': float(row['High'].iloc[0] if isinstance(row['High'], pd.Series) else row['High']),
-                            'low': float(row['Low'].iloc[0] if isinstance(row['Low'], pd.Series) else row['Low']),
-                            'close': float(row['Close'].iloc[0] if isinstance(row['Close'], pd.Series) else row['Close']),
-                            'volume': int(row['Volume'].iloc[0] if isinstance(row['Volume'], pd.Series) else row['Volume'])
-                        },
-                        at=timestamp.to_pydatetime()
-                    )
-                sender.flush()
-            logger.info(f"Backfill complete for {ticker}.")
-        except Exception as e:
-            logger.error(f"Backfill failed for {ticker}: {e}")
-    else:
-        # Full historical backfill in chunks
-        logger.info(f"Starting chunked historical backfill for new ticker {ticker}")
-        end_date = today
-        while True:
-            chunk_start = end_date - datetime.timedelta(days=365 * 5)
-            if chunk_start.year < 1970:
-                chunk_start = datetime.date(1970, 1, 1)
-                
-            logger.info(f"Downloading {ticker} chunk from {chunk_start} to {end_date}")
-            try:
-                data = yf.download(ticker, start=chunk_start.strftime("%Y-%m-%d"), end=end_date.strftime("%Y-%m-%d"), interval="1d", progress=False)
-                if data.empty:
-                    break
-                    
-                with Sender.from_conf(f"tcp::addr={QUESTDB_HOST}:{QUESTDB_ILP_PORT};") as sender:
-                    for timestamp, row in data.dropna().iterrows():
-                        sender.row(
-                            'equity_prices',
-                            symbols={'ticker': ticker},
-                            columns={
-                                'open': float(row['Open'].iloc[0] if isinstance(row['Open'], pd.Series) else row['Open']),
-                                'high': float(row['High'].iloc[0] if isinstance(row['High'], pd.Series) else row['High']),
-                                'low': float(row['Low'].iloc[0] if isinstance(row['Low'], pd.Series) else row['Low']),
-                                'close': float(row['Close'].iloc[0] if isinstance(row['Close'], pd.Series) else row['Close']),
-                                'volume': int(row['Volume'].iloc[0] if isinstance(row['Volume'], pd.Series) else row['Volume'])
-                            },
-                            at=timestamp.to_pydatetime()
-                        )
-                    sender.flush()
-                
-                if chunk_start.year <= 1970:
-                    break
-                    
-                end_date = chunk_start
-                time.sleep(2) 
-                
-            except Exception as e:
-                logger.error(f"Chunked backfill failed for {ticker}: {e}")
-                break
+# get_latest_timestamp_db, DB_CHECK_FAILED, and execute_historical_backfill live in
+# shared/backfill.py -- this used to be a near-duplicate of api/api.py's copy, and the
+# two had already drifted (different "is this ticker stale" thresholds).
 
 INTRADAY_TABLE = "equity_prices_intraday"
 INTRADAY_RETENTION_DAYS = 4
