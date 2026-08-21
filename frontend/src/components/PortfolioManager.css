@@ -1,3 +1,8 @@
+/* Portfolio page styles.
+   Utility classes (.align-right, .positive, .truncate, .text-xs, .w-10, ...) used
+   to be re-declared here with values that had drifted from the other copies --
+   they now live once in App.css. */
+
 .portfolio-manager-container {
   display: flex;
   flex-direction: column;
@@ -8,14 +13,20 @@
 /* Summary Row Cards */
 .portfolio-summary-row {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-@media (min-width: 768px) {
-  .portfolio-summary-row {
-    grid-template-columns: repeat(3, 1fr);
-  }
+@media (min-width: 900px) {
+  /* Four across, explicitly. auto-fit with a 260px floor was wrapping the fourth
+     card onto its own row on a 1520px container. */
+  .portfolio-summary-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+.portfolio-summary-row.cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+@media (min-width: 900px) {
+  .portfolio-summary-row.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 .summary-card {
@@ -50,17 +61,7 @@
   line-height: 1.2;
 }
 
-.summary-card-val.positive {
-  color: var(--color-primary);
-  text-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
-}
-
-.summary-card-val.negative {
-  color: var(--color-danger);
-  text-shadow: 0 0 15px rgba(244, 63, 94, 0.15);
-}
-
-.summary-card-desc {
+.summary-card-val.summary-card-val.summary-card-desc {
   font-size: 0.75rem;
   color: var(--text-secondary);
   margin-top: 0.35rem;
@@ -87,19 +88,6 @@
   background-color: rgba(244, 63, 94, 0.1);
   color: var(--color-danger);
   border: 1px solid rgba(244, 63, 94, 0.2);
-}
-
-/* Split Main Grid */
-.portfolio-main-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .portfolio-main-grid {
-    grid-template-columns: 350px 1fr;
-  }
 }
 
 /* Portfolio Forms */
@@ -235,14 +223,6 @@
   padding: 0.85rem;
   font-size: 0.85rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.02);
-}
-
-.align-right {
-  text-align: right;
-}
-
-.align-center {
-  text-align: center;
 }
 
 .text-right-pnl {
@@ -381,9 +361,6 @@
 .grouped-row.expanded {
   background-color: rgba(255, 255, 255, 0.03);
 }
-.w-10 {
-  width: 2.5rem;
-}
 .chevron-cell {
   text-align: center;
 }
@@ -419,10 +396,6 @@
   padding: 0.5rem;
   border-bottom: 1px solid rgba(255,255,255,0.02);
 }
-.text-xs {
-  font-size: 0.75rem !important;
-}
-
 /* Mini Form */
 .mini-transaction-form {
   border-top: 1px dashed var(--border-color);
@@ -459,11 +432,15 @@
 .mini-submit-btn:hover {
   background-color: #4f46e5;
 }
-.max-w-xs {
-  max-width: 20rem;
+
+/* Single-column stack for the portfolio page. Replaces .portfolio-main-grid,
+   which was declared here but never used by any component. */
+.portfolio-main-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+.portfolio-manager-container > .form-error-alert {
+  margin-bottom: 1rem;
 }

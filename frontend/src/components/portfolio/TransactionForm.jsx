@@ -52,7 +52,7 @@ export default function TransactionForm({ holdings, onAddTransaction }) {
       >
         <h3 className="panel-title">
           <Plus size={16} className="title-icon-primary" />
-          <span>Log New Generic Asset</span>
+          <span>Log a Transaction Manually</span>
         </h3>
         <button className="expand-btn">
           {isFormOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
@@ -62,29 +62,29 @@ export default function TransactionForm({ holdings, onAddTransaction }) {
       {isFormOpen && (
         <div className="form-collapsible-content">
           <p className="panel-desc mt-2">
-            Manually append buys and sells for new assets not yet in your holdings.
+            For assets that are not in the imported Trade Republic export. Existing holdings can be edited inline from their ledger row above.
           </p>
           <form onSubmit={handleSubmit} className="portfolio-form">
             <div className="form-row-type">
-              <button type="button" className={`type-btn btn-buy ${type === 'BUY' ? 'active' : ''}`} onClick={() => setType('BUY')}>Buy (Long)</button>
-              <button type="button" className={`type-btn btn-sell ${type === 'SELL' ? 'active' : ''}`} onClick={() => setType('SELL')}>Sell (Short)</button>
+              <button type="button" className={`type-btn btn-buy ${type === 'BUY' ? 'active' : ''}`} onClick={() => setType('BUY')}>Buy</button>
+              <button type="button" className={`type-btn btn-sell ${type === 'SELL' ? 'active' : ''}`} onClick={() => setType('SELL')}>Sell</button>
             </div>
             <div className="form-group">
-              <label>Asset Ticker / ISIN</label>
+              <label>Ticker or ISIN</label>
               <input type="text" value={ticker} onChange={(e) => setTicker(e.target.value)} className="form-input" required />
             </div>
             <div className="form-grid-two">
               <div className="form-group">
-                <label>Shares (Quantity)</label>
+                <label>Quantity</label>
                 <input type="number" step="any" value={quantity} onChange={(e) => setQuantity(e.target.value)} className="form-input" required />
               </div>
               <div className="form-group">
-                <label>Price ($ USD)</label>
+                <label>Price per share (EUR)</label>
                 <input type="number" step="any" value={price} onChange={(e) => setPrice(e.target.value)} className="form-input" required />
               </div>
             </div>
             <div className="form-group">
-              <label>Transaction Date</label>
+              <label>Transaction date</label>
               <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className="form-input" required />
             </div>
             {formError && <div className="form-error-alert">{formError}</div>}

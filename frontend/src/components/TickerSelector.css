@@ -11,6 +11,7 @@
 }
 
 .ticker-count-badge {
+  white-space: nowrap;
   font-size: 0.7rem;
   font-weight: 600;
   font-family: var(--font-mono);
@@ -25,9 +26,14 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  max-height: 250px;
+  /* Rows are 40px + 8px gap. A 250px cap sliced the sixth row in half, which
+     read as a rendering bug rather than as "scroll for more". Sized to whole
+     rows, with a fade at the bottom edge as the scroll affordance. */
+  max-height: 396px;
   overflow-y: auto;
   padding-right: 0.25rem;
+  mask-image: linear-gradient(to bottom, black calc(100% - 12px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 12px), transparent 100%);
 }
 
 /* Custom internal scrollbar for ticker-list */

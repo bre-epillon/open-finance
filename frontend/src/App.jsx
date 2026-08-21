@@ -1,28 +1,15 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Routes, Route, NavLink, useLocation } from 'react-router-dom';
-import { Activity, Briefcase, Compass } from 'lucide-react';
+import { Activity, Briefcase } from 'lucide-react';
 import Header from './components/Header.jsx';
-import TickerSelector from './components/TickerSelector.jsx';
-import TickerTracker from './components/TickerTracker.jsx';
-import ChartContainer from './components/ChartContainer.jsx';
-import StatsGrid from './components/StatsGrid.jsx';
+import ResearchView from './components/ResearchView.jsx';
 import PortfolioManager from './components/PortfolioManager.jsx';
-import FearAndGreed from './components/FearAndGreed.jsx';
 import Home from './components/Home.jsx';
 import { WINDOW_RESOLUTION } from './utils/resolution.js';
+import { buildColorMap } from './utils/chartTheme.js';
 
 const API_BASE = `http://${window.location.hostname}:8000/api`;
-
-const PRESET_COLORS = [
-  '#10b981', // Emerald
-  '#6366f1', // Indigo
-  '#06b6d4', // Cyan
-  '#f43f5e', // Rose
-  '#eab308', // Amber
-  '#a855f7', // Purple
-  '#f97316', // Orange
-  '#3b82f6'  // Blue
-];
+const POLL_INTERVAL_MS = 5 * 60 * 1000;
 
 export default function App() {
   const location = useLocation();
@@ -36,51 +23,44 @@ export default function App() {
   const cachedTickers = useRef(new Set());
   const cachedResolution = useRef('1d');
 
-  // Dynamically assign colors to tickers from preset palette
-  const tickerColors = useMemo(() => {
-    const mapping = {};
-    tickers.forEach((ticker, idx) => {
-      mapping[ticker] = PRESET_COLORS[idx % PRESET_COLORS.length];
-    });
-    return mapping;
-  }, [tickers]);
+  const tickerColors = useMemo(() => buildColorMap(tickers), [tickers]);
 
-  // Fetch tracked registry of tickers
+  // No dependency on selectedTickers: reading it here made this callback -- and
+  // therefore every effect that depends on it -- rebuild on every click in the
+  // sidebar, which tore down and restarted the background poller each time.
+  // The "select the first ticker if nothing is selected" rule is expressed as a
+  // functional update instead, which needs no read.
   const fetchTickers = useCallback(async (selectNewTicker = null) => {
     setTickersLoading(true);
     try {
       const response = await fetch(`${API_BASE}/tickers`);
-      if (response.ok) {
-        const data = await response.json();
-        setTickers(data);
-        setIsApiConnected(true);
-
-        if (data.length > 0) {
-          if (selectNewTicker && data.includes(selectNewTicker)) {
-            setSelectedTickers((prev) => {
-              if (prev.includes(selectNewTicker)) return prev;
-              return [...prev, selectNewTicker];
-            });
-          } else if (selectedTickers.length === 0) {
-            setSelectedTickers([data[0]]);
-          }
-        }
-      } else {
+      if (!response.ok) {
         setIsApiConnected(false);
+        return;
       }
+      const data = await response.json();
+      setTickers(data);
+      setIsApiConnected(true);
+      if (data.length === 0) return;
+
+      setSelectedTickers((prev) => {
+        if (selectNewTicker && data.includes(selectNewTicker)) {
+          return prev.includes(selectNewTicker) ? prev : [...prev, selectNewTicker];
+        }
+        return prev.length === 0 ? [data[0]] : prev;
+      });
     } catch (err) {
       console.error('Failed to connect to backend registry:', err);
       setIsApiConnected(false);
     } finally {
       setTickersLoading(false);
     }
-  }, [selectedTickers]);
+  }, []);
 
-  // Fetch telemetry historical price data for the Terminal's selected tickers, at the
-  // resolution implied by the selected time window (see handleWindowChange below).
-  // Portfolio Manager fetches its own price history independently -- it needs a
-  // resolution matching the portfolio's full lifetime span, not whatever window the
-  // Terminal chart happens to have selected.
+  // Terminal price history, at the resolution implied by the selected window.
+  // Portfolio Manager fetches its own history independently -- it needs a
+  // resolution matching the portfolio's full lifetime span, not whatever window
+  // the Terminal chart happens to have open.
   const fetchTelemetryData = useCallback(async (forceRefresh = false) => {
     if (selectedTickers.length === 0) {
       setRawData([]);
@@ -92,7 +72,7 @@ export default function App() {
     let uncachedTickers = selectedTickers;
 
     if (!isForced && resolution === cachedResolution.current) {
-      uncachedTickers = selectedTickers.filter(t => !cachedTickers.current.has(t));
+      uncachedTickers = selectedTickers.filter((t) => !cachedTickers.current.has(t));
       if (uncachedTickers.length === 0) return;
     } else {
       cachedTickers.current.clear();
@@ -100,149 +80,114 @@ export default function App() {
     }
 
     setDataLoading(true);
-    const tickersParam = uncachedTickers.join(',');
     try {
       const response = await fetch(
-        `${API_BASE}/data?tickers=${tickersParam}&resolution=${resolution}&limit=5000`
+        `${API_BASE}/data?tickers=${uncachedTickers.join(',')}&resolution=${resolution}&limit=5000`
       );
-      if (response.ok) {
-        const payload = await response.json();
-        setRawData(prev => (isForced || cachedTickers.current.size === 0) ? (payload.data || []) : [...prev, ...(payload.data || [])]);
-        uncachedTickers.forEach(t => cachedTickers.current.add(t));
-        setIsApiConnected(true);
-      } else {
-        console.error('Failed to retrieve telemetry data:', response.statusText);
+      if (!response.ok) {
+        console.error('Failed to retrieve price data:', response.statusText);
+        return;
       }
+      const payload = await response.json();
+      const isFullReplace = isForced || cachedTickers.current.size === 0;
+      setRawData((prev) => (isFullReplace ? payload.data || [] : [...prev, ...(payload.data || [])]));
+      uncachedTickers.forEach((t) => cachedTickers.current.add(t));
+      setIsApiConnected(true);
     } catch (err) {
-      console.error('Network failure pulling telemetry data:', err);
+      console.error('Network failure pulling price data:', err);
     } finally {
       setDataLoading(false);
     }
   }, [selectedTickers, resolution]);
 
-  // Each Terminal time-window implies its own resolution -- see utils/resolution.js.
+  // Keeps the poller below on a stable identity: it should fire every five
+  // minutes regardless of how often the selection changes, rather than
+  // restarting its timer each time.
+  const latestFetch = useRef(fetchTelemetryData);
+  useEffect(() => { latestFetch.current = fetchTelemetryData; }, [fetchTelemetryData]);
+
   const handleWindowChange = useCallback((window) => {
     setResolution(WINDOW_RESOLUTION[window] || '1d');
   }, []);
 
-  // Handle ticker list selections
   const handleToggleTicker = useCallback((ticker) => {
-    setSelectedTickers((prev) => {
-      if (prev.includes(ticker)) {
-        return prev.filter((t) => t !== ticker);
-      } else {
-        return [...prev, ticker];
-      }
-    });
+    setSelectedTickers((prev) =>
+      prev.includes(ticker) ? prev.filter((t) => t !== ticker) : [...prev, ticker]
+    );
   }, []);
 
-  const handleTrackSuccess = useCallback(async (newTicker) => {
-    await fetchTickers(newTicker);
-  }, [fetchTickers]);
+  const handleTrackSuccess = useCallback(
+    async (newTicker) => { await fetchTickers(newTicker); },
+    [fetchTickers]
+  );
 
-  // --- LIFECYCLE ---
+  const handleRefresh = useCallback(() => { fetchTelemetryData(true); }, [fetchTelemetryData]);
+
+  useEffect(() => { fetchTickers(); }, [fetchTickers]);
+
+  useEffect(() => { fetchTelemetryData(); }, [fetchTelemetryData]);
+
   useEffect(() => {
-    fetchTickers();
-  }, []);
-
-  // Sync historical chart data when selected nodes or resolution changes
-  useEffect(() => {
-    fetchTelemetryData();
-  }, [selectedTickers, resolution, fetchTelemetryData]);
-
-  // Light background polling to update terminal data every 5 minutes
-  useEffect(() => {
-    const timer = setInterval(() => {
-      fetchTelemetryData(true);
-    }, 300000);
-
+    const timer = setInterval(() => latestFetch.current(true), POLL_INTERVAL_MS);
     return () => clearInterval(timer);
-  }, [fetchTelemetryData]);
+  }, []);
+
+  const visibleData = useMemo(
+    () => rawData.filter((d) => selectedTickers.includes(d.ticker)),
+    [rawData, selectedTickers]
+  );
+
+  const isLandingPage = location.pathname === '/';
 
   return (
     <div className="app-container">
-      {location.pathname !== '/' && (
-        <Header
-          onRefresh={fetchTelemetryData}
-          loading={dataLoading}
-          isApiConnected={isApiConnected}
-        />
-      )}
-
-      {location.pathname !== '/' && (
-        <nav className="tab-navigation">
-          <NavLink
-            to="/terminal"
-            className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}
-          >
-            <Activity size={16} />
-            <span>Live Terminal</span>
-          </NavLink>
-          <NavLink
-            to="/portfolio"
-            className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}
-          >
-            <Briefcase size={16} />
-            <span>Portfolio Manager</span>
-          </NavLink>
-          <NavLink
-            to="/sentiment"
-            className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}
-          >
-            <Compass size={16} />
-            <span>Fear & Greed Index</span>
-          </NavLink>
-        </nav>
+      {!isLandingPage && (
+        <>
+          <Header onRefresh={handleRefresh} loading={dataLoading} isApiConnected={isApiConnected} />
+          <nav className="tab-navigation">
+            <NavLink to="/portfolio" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+              <Briefcase size={16} />
+              <span>Portfolio</span>
+            </NavLink>
+            <NavLink to="/terminal" className={({ isActive }) => `tab-btn ${isActive ? 'active' : ''}`}>
+              <Activity size={16} />
+              <span>Research</span>
+            </NavLink>
+          </nav>
+        </>
       )}
 
       <Routes>
         <Route path="/" element={<Home />} />
-        
-        <Route path="/terminal" element={
-          <div className="dashboard-grid animate-fade-in">
-            <aside className="sidebar flex flex-col gap-6">
-              <TickerSelector
-                tickers={tickers}
-                selectedTickers={selectedTickers}
-                onToggleTicker={handleToggleTicker}
-                loading={tickersLoading}
-                tickerColors={tickerColors}
-              />
-              <TickerTracker
-                onTrackSuccess={handleTrackSuccess}
-                apiBase={API_BASE}
-              />
-            </aside>
 
-            <section className="main-content flex flex-col gap-6">
-              <ChartContainer
-                rawData={rawData.filter(d => selectedTickers.includes(d.ticker))}
-                selectedTickers={selectedTickers}
-                loading={dataLoading}
-                tickerColors={tickerColors}
-                onWindowChange={handleWindowChange}
-              />
-              
-              <StatsGrid
-                rawData={rawData.filter(d => selectedTickers.includes(d.ticker))}
-                selectedTickers={selectedTickers}
-                tickerColors={tickerColors}
-              />
-            </section>
-          </div>
-        } />
+        <Route
+          path="/terminal"
+          element={
+            <ResearchView
+              tickers={tickers}
+              selectedTickers={selectedTickers}
+              tickerColors={tickerColors}
+              rawData={visibleData}
+              tickersLoading={tickersLoading}
+              dataLoading={dataLoading}
+              apiBase={API_BASE}
+              onToggleTicker={handleToggleTicker}
+              onTrackSuccess={handleTrackSuccess}
+              onWindowChange={handleWindowChange}
+            />
+          }
+        />
 
-        <Route path="/portfolio" element={
-          <PortfolioManager
-            trackedTickers={tickers}
-            apiBase={API_BASE}
-            onTrackNewTicker={handleTrackSuccess}
-          />
-        } />
-
-        <Route path="/sentiment" element={
-          <FearAndGreed apiBase={API_BASE} />
-        } />
+        <Route
+          path="/portfolio"
+          element={
+            <PortfolioManager
+              trackedTickers={tickers}
+              apiBase={API_BASE}
+              onTrackNewTicker={handleTrackSuccess}
+            />
+          }
+        />
       </Routes>
     </div>
   );

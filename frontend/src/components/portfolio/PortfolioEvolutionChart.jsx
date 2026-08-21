@@ -3,7 +3,29 @@ import { Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { AreaChart } from 'lucide-react';
 import { downsampleSeries } from '../../utils/portfolioTimeSeries';
+import { timeSeriesOptions, SERIES } from '../../utils/chartTheme';
+import { formatCurrency, formatCurrencyCompact } from '../../utils/format';
 import '../ChartContainer.css';
+
+// Stack order is fixed: cash -> bonds -> stocks. cyan/amber/emerald in that
+// order clears every CVD and normal-vision separation gate as an adjacent
+// triple; emerald directly beside cyan does not.
+//
+// The "Cumulative Interest" line that used to sit on a second right-hand y-axis
+// is gone. Two y-scales on one chart make the two curves visually comparable
+// when they are not, and the interest was already counted inside the cash band
+// anyway -- so it was double-drawn as well as mis-scaled. Interest income now
+// lives in the Cash Flow panel, where it can be read against the payments that
+// produced it.
+const BANDS = [
+  { key: 'cash', label: 'Free cash', color: SERIES[3] },
+  { key: 'bondsValue', label: 'Bonds (at cost)', color: SERIES[6] },
+  { key: 'stocksValue', label: 'Stocks & funds', color: SERIES[0] },
+];
+
+function withAlpha(hex, alpha) {
+  return `${hex}${alpha}`;
+}
 
 export default function PortfolioEvolutionChart({ valueSeries }) {
   const series = useMemo(() => downsampleSeries(valueSeries), [valueSeries]);
@@ -12,109 +34,68 @@ export default function PortfolioEvolutionChart({ valueSeries }) {
     if (series.length === 0) return null;
     return {
       labels: series.map((p) => p.date),
-      datasets: [
-        {
-          label: 'Free Cash',
-          data: series.map((p) => p.cash),
-          borderColor: '#06b6d4',
-          backgroundColor: 'rgba(6, 182, 212, 0.35)',
-          stack: 'value',
-          fill: true,
-          pointRadius: 0,
-          borderWidth: 1,
-        },
-        {
-          label: 'Bonds',
-          data: series.map((p) => p.bondsValue),
-          borderColor: '#eab308',
-          backgroundColor: 'rgba(234, 179, 8, 0.35)',
-          stack: 'value',
-          fill: true,
-          pointRadius: 0,
-          borderWidth: 1,
-        },
-        {
-          label: 'Stocks & Funds',
-          data: series.map((p) => p.stocksValue),
-          borderColor: '#10b981',
-          backgroundColor: 'rgba(16, 185, 129, 0.35)',
-          stack: 'value',
-          fill: true,
-          pointRadius: 0,
-          borderWidth: 1,
-        },
-        {
-          label: 'Cumulative Interest',
-          data: series.map((p) => p.cumulativeInterest),
-          borderColor: '#a855f7',
-          backgroundColor: 'transparent',
-          borderDash: [4, 3],
-          borderWidth: 2,
-          pointRadius: 0,
-          fill: false,
-          yAxisID: 'y1',
-        },
-      ],
+      datasets: BANDS.map((band) => ({
+        label: band.label,
+        data: series.map((p) => p[band.key]),
+        borderColor: band.color,
+        backgroundColor: withAlpha(band.color, '59'),
+        // A 2px surface-coloured line between fills keeps the bands separable
+        // where two adjacent segments both get thin.
+        borderWidth: 1.5,
+        fill: true,
+        pointRadius: 0,
+        stack: 'value',
+      })),
     };
   }, [series]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: { duration: 300 },
-    interaction: { mode: 'index', intersect: false },
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: { color: '#94a3b8', boxWidth: 10, boxHeight: 10, padding: 15, font: { size: 11 } },
-      },
+  const options = useMemo(
+    () => timeSeriesOptions({ formatY: formatCurrencyCompact, stacked: true }),
+    []
+  );
+
+  const optionsWithFullTooltip = useMemo(() => {
+    const o = { ...options };
+    o.plugins = {
+      ...options.plugins,
       tooltip: {
-        backgroundColor: '#0e1424',
-        titleColor: '#f8fafc',
-        bodyColor: '#e2e8f0',
+        ...options.plugins.tooltip,
         callbacks: {
-          label: (ctx) =>
-            ` ${ctx.dataset.label}: €${ctx.parsed.y.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
+          label: (ctx) => ` ${ctx.dataset.label}: ${formatCurrency(ctx.parsed.y)}`,
+          footer: (items) => {
+            const total = items.reduce((sum, i) => sum + i.parsed.y, 0);
+            return `Total: ${formatCurrency(total)}`;
+          },
         },
       },
-    },
-    scales: {
-      x: {
-        grid: { color: 'rgba(255,255,255,0.03)' },
-        ticks: { color: '#64748b', maxTicksLimit: 10, font: { size: 9 } },
-      },
-      y: {
-        stacked: true,
-        grid: { color: 'rgba(255,255,255,0.03)' },
-        ticks: { color: '#64748b', callback: (v) => `€${v}` },
-      },
-      y1: {
-        position: 'right',
-        grid: { drawOnChartArea: false },
-        ticks: { color: '#a855f7', callback: (v) => `€${v}` },
-      },
-    },
-  }), []);
+    };
+    return o;
+  }, [options]);
 
   return (
     <div className="chart-panel panel glass">
       <div className="panel-header">
         <h3 className="panel-title">
           <AreaChart size={16} className="title-icon-primary" />
-          <span>Portfolio Evolution</span>
+          <span>Portfolio Composition Over Time</span>
         </h3>
       </div>
-      <div className="chart-viewport">
+      <div className="chart-viewport tall">
         {!chartData ? (
           <div className="chart-overlay-state">
             <p className="state-text">Not enough data yet.</p>
           </div>
         ) : (
           <div className="chart-wrapper">
-            <Line data={chartData} options={options} />
+            <Line data={chartData} options={optionsWithFullTooltip} />
           </div>
         )}
       </div>
+      <p className="chart-note">
+        Total height is your net worth in the account on that date. Stocks and funds are
+        marked at their last available close; bonds are held at cost, since no bond price
+        feed is ingested. Free cash includes interest and coupons already received.
+      </p>
     </div>
   );
 }

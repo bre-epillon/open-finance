@@ -3,8 +3,7 @@ import { Plus, Loader2, Sparkles } from 'lucide-react';
 import './TickerTracker.css';
 
 /**
- * TickerTracker Component
- * Allows users to register/track new assets, with real-time feedback and validation.
+ * Registers a new ticker and kicks off its historical backfill.
  */
 export default function TickerTracker({ onTrackSuccess, apiBase }) {
   const [newTicker, setNewTicker] = useState('');
@@ -34,7 +33,7 @@ export default function TickerTracker({ onTrackSuccess, apiBase }) {
         } else {
           setFeedback({
             type: 'success',
-            message: `Success! Backfilling "${tickerToTrack}" in progress.`
+            message: `Backfilling "${tickerToTrack}" now -- it will appear above shortly.`
           });
           setNewTicker('');
           // Refresh parent tracked list
@@ -66,12 +65,12 @@ export default function TickerTracker({ onTrackSuccess, apiBase }) {
       <div className="panel-header">
         <h2 className="panel-title">
           <Sparkles size={16} className="title-icon-sparkle" />
-          <span>Ingest New Node</span>
+          <span>Track a New Asset</span>
         </h2>
       </div>
 
       <p className="panel-desc">
-        Inject and backfill any valid Yahoo Finance equity or crypto ticker (e.g., TSLA, NVDA, ETH-USD) into QuestDB.
+        Backfill any Yahoo Finance ticker (e.g. TSLA, NVDA, ETH-USD) into QuestDB. History is fetched in the background.
       </p>
 
       <form onSubmit={handleTrackSubmit} className="tracker-form">

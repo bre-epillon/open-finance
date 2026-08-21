@@ -26,7 +26,7 @@
 }
 
 .stat-card:hover {
-  border-color: var(--card-border-highlight);
+  border-color: var(--border-hover);
   box-shadow: 0 8px 20px -4px var(--card-accent-glow);
   transform: translateY(-2px);
 }
@@ -147,4 +147,12 @@
   height: 20px;
   background-color: var(--border-color);
   margin: 0 0.5rem;
+}
+
+.stat-footnote {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.66rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
 }

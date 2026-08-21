@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import threading
 import json
 import logging
 import requests
@@ -124,16 +125,6 @@ def save_tracked_ticker(ticker: str):
 # get_latest_timestamp_db, DB_CHECK_FAILED, and execute_historical_backfill live in
 # shared/backfill.py -- this used to be a near-duplicate of worker/main.py's copy, and
 # the two had already drifted (different "is this ticker stale" thresholds).
-
-from sentiment import calculate_fear_and_greed
-
-@app.get("/api/v1/sentiment/fear-and-greed")
-def get_fear_and_greed():
-    try:
-        return calculate_fear_and_greed()
-    except Exception as e:
-        logger.error(f"Error calculating fear and greed: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error calculating sentiment.")
 
 # --- API ENDPOINTS ---
 @app.get("/api/tickers")
@@ -276,14 +267,28 @@ def track_new_ticker(ticker: str, background_tasks: BackgroundTasks):
 
 
 # --- LIFECYCLE ---
+def _backfill_all_tracked():
+    """Backfill every tracked ticker. Runs off the request/serving path."""
+    for t in load_tracked_tickers():
+        try:
+            execute_historical_backfill(t)
+        except Exception as e:
+            # One bad ticker must not abort the remaining backfills.
+            logger.error(f"Startup backfill failed for {t}: {e}")
+
+
 @app.on_event("startup")
 def startup_event():
-    # 1. Init Database Schema
+    # The schema check is fast and everything else depends on it, so it stays
+    # synchronous.
     init_db_schema()
 
-    # 2. Trigger initial backfill for existing tickers
-    for t in load_tracked_tickers():
-        execute_historical_backfill(t)
+    # The backfill sweep does not. It used to run inline here, once per tracked
+    # ticker (34 of them), before Uvicorn would accept a single request -- which
+    # is why a restart could appear to hang for minutes whenever QuestDB's
+    # staleness checks were slow. The API now comes up immediately and the sweep
+    # catches up behind it.
+    threading.Thread(target=_backfill_all_tracked, name="startup-backfill", daemon=True).start()
 
 
 if __name__ == "__main__":

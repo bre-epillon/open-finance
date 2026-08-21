@@ -1,5 +1,10 @@
 # Backlog
 
+> **Superseded for frontend/visualisation items by `REFACTORING.md` (2026-08-21).**
+> The still-open backend and data items below have been carried forward into that
+> file, so `REFACTORING.md` is the one list to work from. This file is kept for
+> the historical record of the 2026-08-18/19 sessions.
+
 Working notes for the next session, written 2026-08-18 after the portfolio
 performance/chart work, updated 2026-08-19 after clearing the "do first"
 items. Grouped by priority, not by when it was found. Line counts and facts

@@ -1,148 +1,85 @@
+/* Chart panel shell, shared by every chart in the app (the portfolio charts
+   import this file too). State/loader/panel-header styles now live in App.css --
+   they were duplicated here and in three other component stylesheets.
+   The dual-range window slider and its mini-preview SVG are gone: they
+   duplicated the time-window buttons above the chart and were the only reason
+   this file and ChartContainer.jsx were oversized. */
+
 .chart-panel {
   display: flex;
   flex-direction: column;
-  height: 500px;
-}
-
-.panel-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.chart-controls {
+  display: flex;
+  align-items: center;
   gap: 0.75rem;
-}
-
-.title-icon-primary {
-  color: var(--color-primary);
-}
-
-.multi-badge {
-  letter-spacing: 0.05em;
+  flex-wrap: wrap;
 }
 
 .time-window-controls {
-  display: flex;
-  gap: 0.25rem;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 0.25rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255,255,255,0.05);
-  flex-wrap: wrap;
-  justify-content: center;
+  display: inline-flex;
+  gap: 2px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color);
+  padding: 3px;
+  border-radius: var(--radius-md);
 }
 
 .time-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 0.75rem;
   font-family: var(--font-mono);
-  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.2s;
+  white-space: nowrap;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.time-btn:hover {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
-}
+.time-btn:hover { color: var(--text-primary); background-color: rgba(255, 255, 255, 0.05); }
 
 .time-btn.active {
-  color: var(--color-primary);
-  background: rgba(16, 185, 129, 0.1);
-  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--bg-raised);
+  box-shadow: var(--shadow-sm);
+}
+
+.time-btn:focus-visible,
+.tab-btn:focus-visible,
+.ticker-item-btn:focus-visible {
+  outline: 2px solid var(--color-info);
+  outline-offset: 1px;
 }
 
 .chart-viewport {
   position: relative;
-  flex-grow: 1;
   width: 100%;
-  height: 100%;
-  background-color: rgba(7, 10, 19, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  border-radius: var(--radius-md);
-  overflow: hidden;
+  min-height: 340px;
   display: flex;
   flex-direction: column;
-  margin-top: 0.25rem;
 }
+
+/* Taller than the default for the stacked composition and performance charts,
+   where the vertical resolution is the point. */
+.chart-viewport.tall { min-height: 420px; }
+.chart-viewport.short { min-height: 200px; }
 
 .chart-wrapper {
   position: relative;
-  flex-grow: 1;
-  padding: 1.25rem 1.25rem 0 1rem;
-  min-height: 0;
-}
-
-.slider-container {
-  position: relative;
-  height: 40px;
-  margin: 0.5rem 1.5rem 1rem 1.5rem;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.mini-preview {
-  position: absolute;
-  top: 0;
-  left: 0;
+  flex: 1;
   width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-radius: var(--radius-sm);
+  min-height: inherit;
 }
 
-.slider-overlay {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: rgba(16, 185, 129, 0.15);
-  border-left: 1px solid var(--color-primary);
-  border-right: 1px solid var(--color-primary);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.range-input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  appearance: none;
-  background: transparent;
-  pointer-events: none;
-  z-index: 2;
-  margin: 0;
-}
-
-.range-input::-webkit-slider-thumb {
-  pointer-events: auto;
-  appearance: none;
-  width: 12px;
-  height: 40px;
-  background: var(--text-primary);
-  cursor: ew-resize;
-  border-radius: 2px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-.range-input::-moz-range-thumb {
-  pointer-events: auto;
-  appearance: none;
-  width: 12px;
-  height: 40px;
-  background: var(--text-primary);
-  cursor: ew-resize;
-  border-radius: 2px;
-  border: none;
-  box-shadow: 0 0 5px rgba(0,0,0,0.5);
-}
-
-/* Loader and Overlay States */
 .chart-overlay-state {
   position: absolute;
   inset: 0;
@@ -150,63 +87,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  padding: 2rem;
-  z-index: 5;
-  pointer-events: none;
+  gap: 0.25rem;
+  z-index: 2;
+  background: rgba(7, 10, 19, 0.55);
+  border-radius: var(--radius-md);
 }
 
-.state-icon-muted {
+/* Caption under a chart that needs one sentence of method, rather than a
+   collapsed <details> nobody opens. */
+.chart-note {
+  font-size: 0.75rem;
   color: var(--text-muted);
-  margin-bottom: 1rem;
-  opacity: 0.6;
-}
-
-.state-icon-warn {
-  color: var(--color-warning);
-  margin-bottom: 1rem;
-  opacity: 0.8;
-  animation: pulse 2.5s infinite ease-in-out;
-}
-
-.state-title {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.4rem;
-}
-
-.state-subtitle {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  max-width: 320px;
-  line-height: 1.4;
-}
-
-.chart-loading-indicator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.loader-ring {
-  width: 36px;
-  height: 36px;
-  border: 2px solid rgba(16, 185, 129, 0.1);
-  border-top: 2px solid var(--color-primary);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-.state-text {
-  font-size: 0.8rem;
-  font-family: var(--font-mono);
-  color: var(--color-primary);
-  letter-spacing: 0.05em;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  line-height: 1.5;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Trash2, ChevronDown, ChevronRight } from 'lucide-react';
+import { formatCurrency, formatSigned, formatSignedPercent, formatQuantity, formatPrice } from '../../utils/format';
 
 export default function HoldingRow({ holding, isExpanded, onToggle, priceError, onAddMiniTransaction, onDeleteTransaction }) {
   const [miniDate, setMiniDate] = useState(() => new Date().toISOString().substring(0, 10));
@@ -52,17 +53,17 @@ export default function HoldingRow({ holding, isExpanded, onToggle, priceError, 
           </div>
         </td>
         <td className="text-muted text-sm max-w-xs truncate" title={holding.name}>{holding.name}</td>
-        <td className="align-right font-mono">{holding.shares.toLocaleString()}</td>
-        <td className="align-right font-mono">${holding.avgPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+        <td className="align-right font-mono">{formatQuantity(holding.shares)}</td>
+        <td className="align-right font-mono">{formatCurrency(holding.avgPrice)}</td>
         <td className="align-right font-mono text-muted">
-          {holding.currentPrice 
-            ? `$${holding.currentPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}` 
-            : priceError ? 'Fetch Failed' : 'Syncing...'}
+          {holding.currentPrice
+            ? formatPrice(holding.currentPrice)
+            : priceError ? 'Fetch failed' : 'Syncing...'}
         </td>
         <td className={`align-right font-mono ${isPos ? 'positive' : 'negative'}`}>
           <div className="table-pnl-cell">
-            <span>{isPos ? '+' : ''}${holding.pnl.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-            <span className="table-pnl-pct">({holding.pnlPercent.toFixed(2)}%)</span>
+            <span>{formatSigned(holding.pnl)}</span>
+            <span className="table-pnl-pct">{formatSignedPercent(holding.pnlPercent)}</span>
           </div>
         </td>
       </tr>
@@ -84,7 +85,7 @@ export default function HoldingRow({ holding, isExpanded, onToggle, priceError, 
                   </tr>
                 </thead>
                 <tbody>
-                  {holding.history.sort((a,b) => new Date(b.date) - new Date(a.date)).map(tx => (
+                  {[...holding.history].sort((a, b) => b.date.localeCompare(a.date)).map(tx => (
                     <tr key={tx.id}>
                       <td className="font-mono text-muted text-xs">{tx.date}</td>
                       <td>
@@ -92,9 +93,9 @@ export default function HoldingRow({ holding, isExpanded, onToggle, priceError, 
                           {tx.type}
                         </span>
                       </td>
-                      <td className="align-right font-mono text-xs">{tx.quantity}</td>
-                      <td className="align-right font-mono text-xs">${parseFloat(tx.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
-                      <td className="align-right font-mono text-xs">${(tx.quantity * tx.price).toLocaleString(undefined, { minimumFractionDigits: 2 })}</td>
+                      <td className="align-right font-mono text-xs">{formatQuantity(Math.abs(tx.quantity))}</td>
+                      <td className="align-right font-mono text-xs">{formatCurrency(parseFloat(tx.price))}</td>
+                      <td className="align-right font-mono text-xs">{formatCurrency(Math.abs(tx.quantity) * tx.price)}</td>
                       <td className="align-center">
                         <button onClick={() => onDeleteTransaction(tx.id)} className="ledger-delete-btn"><Trash2 size={12} /></button>
                       </td>
@@ -111,7 +112,7 @@ export default function HoldingRow({ holding, isExpanded, onToggle, priceError, 
                     <option value="SELL">SELL</option>
                   </select>
                   <input type="number" step="any" placeholder="Qty" value={miniQty} onChange={(e) => setMiniQty(e.target.value)} className="mini-input" required />
-                  <input type="number" step="any" placeholder="Price $" value={miniPrice} onChange={(e) => setMiniPrice(e.target.value)} className="mini-input" required />
+                  <input type="number" step="any" placeholder="Price" value={miniPrice} onChange={(e) => setMiniPrice(e.target.value)} className="mini-input" required />
                   <input type="date" value={miniDate} onChange={(e) => setMiniDate(e.target.value)} className="mini-input" required />
                   <button type="submit" className="mini-submit-btn">Add</button>
                 </form>

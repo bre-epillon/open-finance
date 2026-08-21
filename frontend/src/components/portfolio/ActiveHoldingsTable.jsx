@@ -14,7 +14,7 @@ export default function ActiveHoldingsTable({ activeHoldings, priceError, onAddT
       <div className="panel-header">
         <h3 className="panel-title">
           <Briefcase size={16} className="title-icon-primary" />
-          <span>Current Holdings & Ledger</span>
+          <span>Holdings &amp; Ledger</span>
         </h3>
       </div>
 
@@ -24,11 +24,11 @@ export default function ActiveHoldingsTable({ activeHoldings, priceError, onAddT
             <tr>
               <th className="w-10"></th>
               <th>Symbol</th>
-              <th>Asset Name</th>
-              <th className="align-right">Qty Owned</th>
-              <th className="align-right">Avg Price</th>
-              <th className="align-right">Last Price</th>
-              <th className="align-right text-right-pnl">Total Returns</th>
+              <th>Asset name</th>
+              <th className="align-right">Quantity</th>
+              <th className="align-right">Avg cost</th>
+              <th className="align-right">Last close</th>
+              <th className="align-right text-right-pnl">Unrealised P&amp;L</th>
             </tr>
           </thead>
           <tbody>
@@ -47,7 +47,7 @@ export default function ActiveHoldingsTable({ activeHoldings, priceError, onAddT
             {activeHoldings.length === 0 && (
               <tr>
                 <td colSpan="7" className="table-empty-row">
-                  No active assets. Log a buy transaction above to initialize holdings.
+                  No open positions. Use the form at the bottom of the page to log one.
                 </td>
               </tr>
             )}

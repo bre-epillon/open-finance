@@ -3,8 +3,8 @@ import { Layers, Check } from 'lucide-react';
 import './TickerSelector.css';
 
 /**
- * TickerSelector Component
- * Allows user to view all tracked tickers and select multiple tickers for chart comparison.
+ * The tracked-asset list. Colour is assigned by slot order from the shared
+ * palette (see utils/chartTheme.js) and is the same colour the chart uses.
  */
 export default function TickerSelector({
   tickers,
@@ -20,13 +20,11 @@ export default function TickerSelector({
           <Layers size={16} className="title-icon" />
           <span>Tracked Assets</span>
         </h2>
-        <span className="ticker-count-badge">
-          {selectedTickers.length} active
-        </span>
+        <span className="ticker-count-badge">{selectedTickers.length} on</span>
       </div>
 
       <p className="panel-desc">
-        Select one or more assets below to dynamically overlay and analyze their historical curves.
+        Select assets to overlay. With more than one selected the chart switches to percent change, so different price levels stay comparable.
       </p>
 
       {loading && tickers.length === 0 ? (
@@ -65,7 +63,7 @@ export default function TickerSelector({
           
           {tickers.length === 0 && (
             <div className="empty-tickers-message">
-              No assets tracked yet. Add one below to get started!
+              No assets tracked yet. Add one below.
             </div>
           )}
         </div>

@@ -1,10 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import { Wallet, ChevronDown, ChevronUp } from 'lucide-react';
-import '../PortfolioManager.css';
+import { formatCurrency, formatSigned } from '../../utils/format';
 import '../ChartContainer.css';
 
 export default function CashFlowView({ cashDeposits, interestPayments }) {
-  const [collapsed, setCollapsed] = useState(false);
+  // Collapsed by default: an append-only ledger of several hundred rows, open by
+  // default, was pushing the page height into the thousands of pixels.
+  const [collapsed, setCollapsed] = useState(true);
 
   const totals = useMemo(() => {
     const netCashMovements = cashDeposits.reduce((sum, d) => sum + d.amount, 0);
@@ -35,7 +37,6 @@ export default function CashFlowView({ cashDeposits, interestPayments }) {
     return [...movements, ...income].sort((a, b) => b.date.localeCompare(a.date));
   }, [cashDeposits, interestPayments]);
 
-  const fmt = (n) => `€${Math.abs(n).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   return (
     <div className="cashflow-panel panel glass">
@@ -43,27 +44,27 @@ export default function CashFlowView({ cashDeposits, interestPayments }) {
         <div className="panel-header-row">
           <h3 className="panel-title">
             <Wallet size={16} className="title-icon-primary" />
-            <span>Cash Flow & Interest Income</span>
+            <span>Cash Flow &amp; Income</span>
           </h3>
           <button className="time-btn" onClick={() => setCollapsed((c) => !c)}>
             {collapsed ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
-            <span>{collapsed ? `Show ${rows.length} Transactions` : 'Collapse Transactions'}</span>
+            <span>{collapsed ? `Show ${rows.length} entries` : 'Hide entries'}</span>
           </button>
         </div>
       </div>
 
-      <div className="portfolio-summary-row">
+      <div className="portfolio-summary-row cols-3">
         <div className="summary-card glass">
-          <span className="summary-card-label">Net Cash Movements</span>
-          <h2 className="summary-card-val font-mono">{fmt(totals.netCashMovements)}</h2>
+          <span className="summary-card-label">Net cash movements</span>
+          <h2 className="summary-card-val font-mono">{formatCurrency(totals.netCashMovements)}</h2>
         </div>
         <div className="summary-card glass">
-          <span className="summary-card-label">Investment Income (Bonds + Dividends)</span>
-          <h2 className="summary-card-val font-mono positive">{fmt(totals.investmentIncome)}</h2>
+          <span className="summary-card-label">Investment income (bonds + dividends)</span>
+          <h2 className="summary-card-val font-mono positive">{formatCurrency(totals.investmentIncome)}</h2>
         </div>
         <div className="summary-card glass">
-          <span className="summary-card-label">Idle Cash Interest</span>
-          <h2 className="summary-card-val font-mono positive">{fmt(totals.cashInterest)}</h2>
+          <span className="summary-card-label">Idle cash interest</span>
+          <h2 className="summary-card-val font-mono positive">{formatCurrency(totals.cashInterest)}</h2>
         </div>
       </div>
 
@@ -85,7 +86,7 @@ export default function CashFlowView({ cashDeposits, interestPayments }) {
                   <td>{r.type}</td>
                   <td>{r.label}</td>
                   <td className={`align-right font-mono ${r.amount >= 0 ? 'positive' : 'negative'}`}>
-                    {r.amount >= 0 ? '+' : '-'}{fmt(r.amount)}
+                    {formatSigned(r.amount)}
                   </td>
                 </tr>
               ))}
