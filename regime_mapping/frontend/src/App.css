@@ -1,0 +1,243 @@
+/* Dark surface and ink tokens mirror open-finance/frontend/src/App.css, so the
+   two dashboards read as one product. This file is the authority for the
+   literals duplicated in src/theme.js -- a canvas has no cascade, so Chart.js
+   needs concrete colours at dataset-build time and the two lists must be kept
+   in step by hand. */
+
+/* Design tokens.
+ *
+ * The two dashboards are deliberately NOT sharing a package -- separate apps,
+ * separate builds -- but they use the same token vocabulary and the same
+ * values, so a snippet copied from one renders correctly in the other and the
+ * two read as one product.
+ *
+ * AUTHORITY: open-finance/frontend/src/App.css. When a shared token changes
+ * there, change it here too. The names below were `--surface-0/1/2`,
+ * `--ink-1/2/3`, `--line`, `--sans`, `--mono`; they were renamed to match. Two
+ * values had already drifted apart before anyone noticed (--bg-card was
+ * #151d31 against #121a30, and the border alpha was 0.08 against 0.07), which
+ * is the argument for keeping one vocabulary even without one file.
+ *
+ * `--fear` / `--greed` / `--neutral` are this project's own and have no
+ * counterpart over there: they are a *diverging* scale, not categorical
+ * series. See theme.js for why they are blue/orange and not green/red. */
+:root {
+  color-scheme: dark;
+
+  /* --- shared with open-finance: keep in step --- */
+  --bg-base: #070a13;
+  --bg-surface: #0e1424;
+  --bg-card: #121a30;
+  --bg-raised: #1b2745;
+  --border-color: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #7c8ba1;
+  --text-axis: #8896ab;
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* --- this project's own: the diverging sentiment scale --- */
+  --fear: #3b82f6;
+  --greed: #ea580c;
+  --neutral: #64748b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app { max-width: 1320px; margin: 0 auto; padding: 20px 20px 48px; }
+
+.app-head, .panel-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+.app-head { margin-bottom: 18px; }
+.app-head h1, .panel-head h2 {
+  display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 600;
+}
+.app-head h1 { font-size: 17px; }
+.panel-head { margin-bottom: 14px; }
+.panel-head h2 { font-size: 13px; letter-spacing: 0.02em; color: var(--text-secondary); }
+.panel-meta {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);
+}
+
+/* align-items: start, not the default stretch: a short panel beside a tall
+   chart was being stretched to match it, leaving a large empty area inside the
+   card. Panels now take the height of their own content. */
+.grid {
+  display: grid; grid-template-columns: repeat(12, 1fr);
+  gap: 14px; align-items: start;
+}
+.span-4 { grid-column: span 4; }
+.span-8 { grid-column: span 8; }
+.span-12 { grid-column: span 12; }
+@media (max-width: 900px) {
+  .span-4, .span-8, .span-12 { grid-column: span 12; }
+}
+
+.panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.ghost-button {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg-card); color: var(--text-secondary);
+  border: 1px solid var(--border-color); border-radius: 7px;
+  padding: 5px 9px; font: inherit; font-size: 11px; cursor: pointer;
+}
+.ghost-button:hover:not(:disabled) { color: var(--text-primary); }
+.ghost-button:disabled { opacity: 0.5; cursor: default; }
+.spin { animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.banner.demo {
+  background: rgba(234, 88, 12, 0.12);
+  border-color: rgba(234, 88, 12, 0.45);
+}
+.banner {
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  border-radius: 9px; padding: 11px 14px; margin-bottom: 14px;
+  color: var(--text-primary); font-size: 13px;
+}
+.state-text { color: var(--text-muted); font-size: 13px; }
+
+.caption, .disclaimer {
+  margin: 12px 0 0; font-size: 11.5px; line-height: 1.55; color: var(--text-muted);
+}
+.disclaimer {
+  display: flex; align-items: flex-start; gap: 7px;
+  padding-top: 11px; border-top: 1px solid var(--border-color);
+}
+.disclaimer svg { flex: 0 0 auto; margin-top: 1px; }
+
+/* --- regime call ------------------------------------------------------- */
+
+.call-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.call-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1px solid; border-radius: 999px; padding: 5px 13px;
+  font-size: 14px; font-weight: 600;
+}
+.call-conf { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
+.call-floor { color: var(--text-muted); }
+.call-reading { margin: 12px 0 0; font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0 0; }
+.stat dt { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.stat dd { margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.stat-value { font-size: 20px; font-weight: 600; }
+.stat-sub, .stat-note {
+  font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);
+}
+
+/* --- scatter ----------------------------------------------------------- */
+
+.chart-box { height: 380px; }
+.chart-box.short { height: 210px; }
+
+/* --- gauge ------------------------------------------------------------- */
+
+.gauge-svg { width: 100%; max-width: 260px; display: block; margin: 0 auto; }
+.gauge-end { fill: #7c8ba1; font-family: var(--font-mono); font-size: 9px; }
+
+.hero { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+/* Proportional figures, not tabular: at this size tabular-nums makes a number
+   like 121 look loose. */
+.hero-value { font-size: 52px; font-weight: 600; line-height: 1; }
+.hero-label { font-size: 12px; color: var(--text-secondary); letter-spacing: 0.03em; }
+
+.scale-key, .legend {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  list-style: none; margin: 12px 0 0; padding: 0;
+  font-size: 11px; color: var(--text-secondary);
+}
+.scale-key li, .legend li { display: flex; align-items: center; gap: 6px; }
+.dot { width: 9px; height: 9px; border-radius: 3px; }
+.key-line { width: 14px; height: 3px; border-radius: 2px; }
+
+/* --- component bars ---------------------------------------------------- */
+
+.bar-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+.bar-list li {
+  display: grid; grid-template-columns: 150px minmax(0, 1fr) 34px;
+  align-items: center; gap: 12px;
+}
+.bar-label { font-size: 12px; color: var(--text-secondary); }
+.bar-track {
+  position: relative; height: 9px; border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+.bar-fill {
+  position: absolute; inset: 0 auto 0 0; border-radius: 4px;
+  box-shadow: 0 0 0 2px var(--bg-surface);
+}
+.bar-mid {
+  position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px;
+  background: rgba(255, 255, 255, 0.22);
+}
+.bar-value {
+  font-family: var(--font-mono); font-size: 11px; text-align: right;
+  font-variant-numeric: tabular-nums; color: var(--text-primary);
+}
+
+/* --- tables ------------------------------------------------------------ */
+
+.table-scroll { max-height: 380px; overflow: auto; }
+/* Horizontal only, no height cap: the tilt table is five rows and should
+   never scroll vertically, but its columns must not squeeze on a phone. */
+.table-scroll.wide { max-height: none; overflow-x: auto; overflow-y: visible; }
+.table-scroll.wide table { min-width: 520px; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.data-table th {
+  position: sticky; top: 0; background: var(--bg-surface);
+  text-align: left; font-weight: 500; font-size: 10.5px;
+  color: var(--text-muted); padding: 7px 9px; border-bottom: 1px solid var(--border-color);
+}
+.data-table td {
+  padding: 7px 9px; border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+}
+.data-table td:first-child, .tilt-table td:first-child {
+  font-family: var(--font-sans); color: var(--text-primary);
+}
+.data-table .num { text-align: right; }
+.data-table .strong { color: var(--text-primary); font-weight: 600; }
+
+.diverge { position: relative; display: block; height: 16px; min-width: 150px; }
+.diverge-mid {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.diverge-fill {
+  position: absolute; top: 4px; height: 8px; border-radius: 3px;
+  box-shadow: 0 0 0 2px var(--bg-surface);
+}
+.diverge-value {
+  position: absolute; right: 0; top: 0; font-size: 11px;
+  font-variant-numeric: tabular-nums; color: var(--text-secondary);
+}
+
+.app-foot {
+  display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;
+  font-size: 11px; color: var(--text-muted);
+}

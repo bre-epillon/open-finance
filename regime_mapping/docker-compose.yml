@@ -1,0 +1,63 @@
+# regime_mapping runs alongside the open-finance stack and shares its QuestDB.
+# It does NOT declare a questdb service of its own -- two containers writing
+# the same volume would corrupt it.
+#
+# Bring open-finance up first, then:
+#     docker compose up -d --build
+#
+# VERIFY THE NETWORK NAME before the first run. Compose derives it from the
+# directory name, so it is open-finance_default only if that repo lives in a
+# directory called `open-finance`:
+#     docker network ls | grep default
+
+services:
+  regime_api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: regime_api
+    ports:
+      - "8100:8100"
+    env_file:
+      - .env
+    environment:
+      - QUESTDB_HOST=questdb
+      - OPEN_FINANCE_API=http://financial_api:8000
+    volumes:
+      - .:/app          # edit-and-reload, same pattern as open-finance
+    restart: unless-stopped
+
+  regime_worker:
+    build:
+      context: .
+      dockerfile: worker/Dockerfile
+    container_name: regime_worker
+    depends_on:
+      - regime_api
+    env_file:
+      - .env
+    environment:
+      - QUESTDB_HOST=questdb
+      - OPEN_FINANCE_API=http://financial_api:8000
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+  regime_frontend:
+    build: ./frontend
+    container_name: regime_frontend
+    depends_on:
+      - regime_api
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+networks:
+  default:
+    external: true
+    name: open-finance_default

@@ -1,0 +1,16 @@
+# Runtime for api/, worker/ and mcp/. Versions left open to match the
+# open-finance images they sit alongside; pin if reproducibility bites.
+fastapi
+uvicorn[standard]
+pandas
+numpy
+requests
+psycopg[binary]      # QuestDB pg-wire on 8812, for the ASOF JOIN read
+questdb              # ILP writer on 9009
+APScheduler
+# Pinned below 2.0: mcp 2.x removed `mcp.server.fastmcp` (FastMCP moved out of
+# the SDK), so a fresh `pip install -r` picked up 2.0.0 and mcp_server/server.py
+# stopped importing -- tests/test_mcp_server.py fails at collection, which
+# takes the whole suite down with it. Verified: 191 pass on 1.29.0, collection
+# error on 2.0.0. Migrating to the 2.x API is a follow-up, not a pin removal.
+mcp>=1.2,<2          # MCP server (stdio)

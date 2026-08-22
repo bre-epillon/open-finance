@@ -65,6 +65,35 @@ def init_db_schema():
             applied_at TIMESTAMP
         ) TIMESTAMP(applied_at) PARTITION BY MONTH WAL;
         """,
+        # macro_indicators had NO CREATE TABLE until 2026-08-22, so the ILP
+        # Sender auto-created it with QuestDB's defaults: PARTITION BY DAY and
+        # no deduplication keys. Both were wrong for this table, and the
+        # consequences were severe.
+        #
+        # DAY partitioning: this holds ~14 low-frequency series over 55 years.
+        # A daily partition per observation day gave 8,573 near-empty
+        # partitions, and once deep history arrived out of order QuestDB spent
+        # hours in a single O3 merge rewriting 8,354 of them one at a time --
+        # during which reads of the table simply queued. Exactly the failure
+        # BACKLOG.md records for equity_prices at 11,513 partitions. YEAR
+        # gives 55 partitions for the same data.
+        #
+        # No dedup keys: fred_worker re-fetches its whole window nightly, so
+        # every observation was stored once per night the worker had run
+        # (41,260 rows where ~15,000 were distinct).
+        #
+        # This CREATE is what stops both recurring on a fresh volume -- an
+        # ILP-auto-created table takes the defaults again, so the shape has to
+        # exist before the first write.
+        """
+        CREATE TABLE IF NOT EXISTS macro_indicators (
+            indicator SYMBOL INDEX,
+            series_id SYMBOL,
+            value DOUBLE,
+            timestamp TIMESTAMP
+        ) TIMESTAMP(timestamp) PARTITION BY YEAR WAL
+          DEDUPLICATE UPSERT KEYS (timestamp, indicator);
+        """,
         # Short-retention home for the worker's hourly "current price" ticks -- kept
         # separate from equity_prices so intraday rows never mix with full daily history
         # (that mixing is what made resolution=1h ambiguous beyond the last couple of

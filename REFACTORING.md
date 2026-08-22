@@ -56,18 +56,27 @@ a public IP. Group them into one "hardening" session.
 
 ## P1 — Correctness and trust in the numbers
 
-- [ ] **No tests anywhere, and `portfolioTimeSeries.js` is the highest-risk file
-      in the repo.** It silently produces plausible-but-wrong numbers; three
-      separate bugs were found there by hand-diffing totals. It now has two more
-      consumers (`RiskPanel` and `AllocationPanel` both read its output), so the
-      blast radius grew. Add Vitest with fixed synthetic inputs covering:
-      `buildValueSeries` (BUY/SELL sign handling, missing-price fallback to cost
-      basis, the `totalValue === netContributions + cashInterestCum + dividendsCum
-      + bondsIncomeCum + selloffGainsCum + stocksUnrealizedGain` identity),
-      `buildPerformanceSeries` (a deposit must not register as a gain; all
-      components on must reproduce the value curve), and the new
-      `computeRiskStats` / `computeAllocation`. This is the single highest-value
-      item on the list.
+- [x] **DONE 2026-08-22 — tests for `portfolioTimeSeries.js` and
+      `portfolioStats.js`.** 50 tests, `npm test` in `frontend/`
+      (`vitest run`, no DB, no browser, ~0.7s). Each of the three bugs
+      `BACKLOG.md` records finding by hand has a named test: the SELL-quantity
+      sign, the $0-instead-of-cost-basis fallback for a ticker with no price
+      history, and the bond realised-gain cost basis. Also guarded: the
+      accounting identity (`totalValue` equals the sum of its six attribution
+      buckets at *every* point), that a deposit never registers as a gain, that
+      the benchmark is a shadow portfolio receiving the same flows rather than a
+      price index, and that the drawdown/risk figures are measured on the
+      time-weighted index rather than on total value.
+
+      Verified by mutation: reintroducing each of the four behaviours above by
+      hand makes the corresponding test fail, and restoring it makes them pass.
+      A suite that only passes on correct code proves nothing.
+
+      Two of the 50 failed on first run, both because the *fixture* was wrong
+      rather than the code: one gave the value series a single day and then
+      expected the benchmark to be reported on a second, and one assumed
+      2024-01-01 to 2026-01-01 is 730 days when 2024 is a leap year and it is
+      731. The implementation was correct to six decimal places in both cases.
 
 - [ ] **Mixed currencies are labelled as EUR.** The whole UI now formats as EUR,
       which is right for transactions, deposits and coupons. But yfinance closes

@@ -39,9 +39,10 @@ services:
     container_name: fred_worker
     depends_on:
       - questdb
+    env_file:
+      - .env          # FRED_API_KEY lives here; .env is gitignored
     environment:
       - QUESTDB_HOST=questdb
-      - FRED_API_KEY=05f6f0ba0a0347f8cb544300570ad8de
     restart: unless-stopped
 
   frontend:

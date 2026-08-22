@@ -11,7 +11,29 @@ logger = logging.getLogger(__name__)
 
 QUESTDB_HOST = os.getenv("QUESTDB_HOST", "questdb")
 QUESTDB_ILP_PORT = int(os.getenv("QUESTDB_ILP_PORT", 9009))
-FRED_API_KEY = os.getenv("FRED_API_KEY", "05f6f0ba0a0347f8cb544300570ad8de")
+# No default. A committed key is what got the old one revoked; a silent
+# fallback default is worse than a crash, because the worker would keep
+# "succeeding" against a dead key and quietly stop updating the macro tables.
+FRED_API_KEY = os.getenv("FRED_API_KEY")
+if not FRED_API_KEY:
+    raise SystemExit("FRED_API_KEY is not set -- put it in .env (see patches/README.md)")
+
+# FRED returns the full series in a single call and the payload is a few
+# hundred KB, so there is no reason to truncate. The previous 5-year window
+# made every trailing z-score unusable: quarterly real GDP had ~20
+# observations, which cannot support a percentile or a standard deviation.
+# Safe only once macro_indicators has DEDUPLICATE UPSERT KEYS(timestamp,
+# indicator) -- see patches/0003-macro-dedup.sql -- otherwise the nightly
+# re-ingest appends 65 years of rows instead of upserting them.
+# 1970, not 1960: QuestDB's ILP protocol rejects a negative designated
+# timestamp, and a pre-epoch row aborts the entire series rather than being
+# skipped. regime_mapping's worker hit exactly this at 1960 --
+#   "Timestamp -315619200000000000 is negative. It must be >= 0"
+# -- and here it would silently drop CPIAUCSL (from 1947), UNRATE (1948),
+# FEDFUNDS (1954) and M2SL (1959), which is four of the eight series. 1970
+# still leaves 55 years, far more than a 120-month trailing z-score needs.
+EPOCH = datetime.datetime(1970, 1, 1, tzinfo=datetime.timezone.utc)
+OBSERVATION_START = "1970-01-01"
 
 MACRO_INDICATORS = {
     'GDP_Growth': 'A191RL1Q225SBEA', # Real GDP % Change
@@ -33,8 +55,7 @@ def fetch_and_ingest_fred_data():
             "series_id": series_id,
             "api_key": FRED_API_KEY,
             "file_type": "json",
-            # Get data for the last 5 years to ensure we have recent history
-            "observation_start": (datetime.date.today() - datetime.timedelta(days=365*5)).strftime("%Y-%m-%d"),
+            "observation_start": OBSERVATION_START,
             "sort_order": "asc"
         }
         
@@ -60,8 +81,16 @@ def fetch_and_ingest_fred_data():
                             continue
                             
                         value = float(value_str)
-                        timestamp = datetime.datetime.strptime(date_str, "%Y-%m-%d")
-                        
+                        # Timezone-aware, so questdb 4.x does not warn about a
+                        # naive datetime; FRED dates are UTC days.
+                        timestamp = datetime.datetime.strptime(
+                            date_str, "%Y-%m-%d").replace(tzinfo=datetime.timezone.utc)
+                        # See EPOCH above. OBSERVATION_START already prevents
+                        # this; the guard keeps one bad row from aborting the
+                        # whole series if that constant is widened again.
+                        if timestamp < EPOCH:
+                            continue
+
                         sender.row(
                             'macro_indicators',
                             symbols={'indicator': name, 'series_id': series_id},
